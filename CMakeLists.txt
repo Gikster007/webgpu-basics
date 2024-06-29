@@ -12,7 +12,7 @@ endif()
 project ("basic-webgpu-app")
 
 # Add source to this project's executable.
-add_executable (basic-webgpu-app "main.cpp")
+add_executable (basic-webgpu-app "src/main.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET basic-webgpu-app PROPERTY CXX_STANDARD 20)
