@@ -14,8 +14,21 @@ project ("basic-webgpu-app")
 # Add source to this project's executable.
 add_executable (basic-webgpu-app "src/main.cpp")
 
+# Add target properties
+set_target_properties(basic-webgpu-app PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+    COMPILE_WARNING_AS_ERROR ON
+)
+
+# Catch more warnings
+if (MSVC)
+    target_compile_options(basic-webgpu-app PRIVATE /W4)
+else()
+    target_compile_options(basic-webgpu-app PRIVATE -Wall -Wextra -pedantic)
+endif()
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET basic-webgpu-app PROPERTY CXX_STANDARD 20)
 endif()
-
-# TODO: Add tests and install targets if needed.
