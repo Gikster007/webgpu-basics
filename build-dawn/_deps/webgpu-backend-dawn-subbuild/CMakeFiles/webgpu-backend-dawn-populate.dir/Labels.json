@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/webgpu-backend-dawn-populate"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/a4cff7a3c0a3b9042029f50fe0cb46bf/webgpu-backend-dawn-populate.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/6803f4f05efbea3abb09adc8f880317e/webgpu-backend-dawn-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-build.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-download.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-install.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-test.rule"
+		},
+		{
+			"file" : "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/webgpu-backend-dawn-subbuild/CMakeFiles/d4ccd286e210d9a33b2d701a3aa9906c/webgpu-backend-dawn-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"webgpu-backend-dawn-populate"
+		],
+		"name" : "webgpu-backend-dawn-populate"
+	}
+}

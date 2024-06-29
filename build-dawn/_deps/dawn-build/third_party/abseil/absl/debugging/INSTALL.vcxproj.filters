@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\CMakeFiles\bc99541344dce33420e6d3cc19ad9f90\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{52637CF0-3AEE-3836-97A5-CC1E32A19534}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

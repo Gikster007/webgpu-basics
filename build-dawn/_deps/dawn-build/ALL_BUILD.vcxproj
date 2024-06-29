@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{395ADEA3-EA25-3F21-8504-FBD76DC8B6BA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython\Support.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython3.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython\Support.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython3.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython\Support.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython3.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython\Support.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FindPython3.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\ZERO_CHECK.vcxproj">
+      <Project>{8370CD38-94B0-30C0-B70B-A84D7B007236}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\types\absl_bad_any_cast_impl.vcxproj">
+      <Project>{1C6C5847-6B98-3C10-A213-4B50B2F60608}</Project>
+      <Name>absl_bad_any_cast_impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\types\absl_bad_optional_access.vcxproj">
+      <Project>{CA4969FA-0576-3767-9473-B7316D6D5FAC}</Project>
+      <Name>absl_bad_optional_access</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\types\absl_bad_variant_access.vcxproj">
+      <Project>{FF43D3CA-0828-3D8C-80EE-6E4A321EC3F7}</Project>
+      <Name>absl_bad_variant_access</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_base.vcxproj">
+      <Project>{4C996C62-00A2-3E59-B37F-D28321A54867}</Project>
+      <Name>absl_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_city.vcxproj">
+      <Project>{2E9CA855-5AFE-3B65-A988-E0053E38963F}</Project>
+      <Name>absl_city</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_civil_time.vcxproj">
+      <Project>{710454D2-8A4A-3118-8DED-B01DBB3B18D1}</Project>
+      <Name>absl_civil_time</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cord.vcxproj">
+      <Project>{FA689950-38A4-306E-96A8-E62392EEE2BF}</Project>
+      <Name>absl_cord</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cord_internal.vcxproj">
+      <Project>{0876788B-6026-3B56-B035-DE5677B5B0FF}</Project>
+      <Name>absl_cord_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_functions.vcxproj">
+      <Project>{238B97FA-816F-3D67-BFF4-59311E272DE8}</Project>
+      <Name>absl_cordz_functions</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_handle.vcxproj">
+      <Project>{2B5811C4-18CB-37BF-A3FA-59A222568FB4}</Project>
+      <Name>absl_cordz_handle</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_info.vcxproj">
+      <Project>{81A9095C-C42E-3837-A48B-C17247C2E037}</Project>
+      <Name>absl_cordz_info</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_sample_token.vcxproj">
+      <Project>{31314EB0-364D-3DAF-BCB3-B103794BAE1D}</Project>
+      <Name>absl_cordz_sample_token</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc32c.vcxproj">
+      <Project>{82011771-0C49-348C-9A0C-23CB4D4D10A1}</Project>
+      <Name>absl_crc32c</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_cord_state.vcxproj">
+      <Project>{57E2BCED-1EB7-3B13-B5CD-C0EADA6F8152}</Project>
+      <Name>absl_crc_cord_state</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_cpu_detect.vcxproj">
+      <Project>{E0DCC29C-0737-31F4-B405-672B9688C5B5}</Project>
+      <Name>absl_crc_cpu_detect</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_internal.vcxproj">
+      <Project>{D911256D-20E7-36FB-853D-2D8378046FAC}</Project>
+      <Name>absl_crc_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_debugging_internal.vcxproj">
+      <Project>{83D32DE4-D4B9-35B0-BC1F-52853B1A0206}</Project>
+      <Name>absl_debugging_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_demangle_internal.vcxproj">
+      <Project>{96B817B7-228E-318C-ADED-8A9A0CAAC298}</Project>
+      <Name>absl_demangle_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_die_if_null.vcxproj">
+      <Project>{9B96CD7E-C6B2-31D6-B899-90F74531246F}</Project>
+      <Name>absl_die_if_null</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_examine_stack.vcxproj">
+      <Project>{EB7E9B58-5C17-3566-8533-87475FFFCC9F}</Project>
+      <Name>absl_examine_stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\profiling\absl_exponential_biased.vcxproj">
+      <Project>{9A836C6D-7552-3E83-9BB8-D3ADCA626D37}</Project>
+      <Name>absl_exponential_biased</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_failure_signal_handler.vcxproj">
+      <Project>{E4408E85-8D04-33D7-8EEB-CD95E17D43D6}</Project>
+      <Name>absl_failure_signal_handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_commandlineflag.vcxproj">
+      <Project>{48A26516-2BE1-3BA4-A12C-3890392A4606}</Project>
+      <Name>absl_flags_commandlineflag</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_commandlineflag_internal.vcxproj">
+      <Project>{DC731C25-3B1B-3814-AB5B-87E864B918E8}</Project>
+      <Name>absl_flags_commandlineflag_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_config.vcxproj">
+      <Project>{7DE0DA86-0A28-36FD-A73E-C8B94AB914D2}</Project>
+      <Name>absl_flags_config</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_internal.vcxproj">
+      <Project>{E8EF2CAC-D5E2-382F-BE10-F92DE92362F5}</Project>
+      <Name>absl_flags_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_marshalling.vcxproj">
+      <Project>{B1975586-357D-3DF3-9365-4E0600125342}</Project>
+      <Name>absl_flags_marshalling</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_parse.vcxproj">
+      <Project>{D0F745C5-820E-3FF8-8EA5-CEB1BF81F848}</Project>
+      <Name>absl_flags_parse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_private_handle_accessor.vcxproj">
+      <Project>{6B5A43CE-395B-3EC7-911B-EAD8BBBB3F48}</Project>
+      <Name>absl_flags_private_handle_accessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_program_name.vcxproj">
+      <Project>{02922635-43A8-3127-BFD9-1E05B31FE81D}</Project>
+      <Name>absl_flags_program_name</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_reflection.vcxproj">
+      <Project>{3E042F9B-8454-3BCD-86F4-5027D910C79F}</Project>
+      <Name>absl_flags_reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_usage.vcxproj">
+      <Project>{9BCBA054-324F-3D95-993B-C120FAD53F4F}</Project>
+      <Name>absl_flags_usage</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\flags\absl_flags_usage_internal.vcxproj">
+      <Project>{1E211DBF-5AF3-35EA-ACA1-2840C601C23B}</Project>
+      <Name>absl_flags_usage_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_graphcycles_internal.vcxproj">
+      <Project>{F2BB113B-D0EE-3720-B68C-232EF8DA2E1B}</Project>
+      <Name>absl_graphcycles_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_hash.vcxproj">
+      <Project>{F46AE19E-6474-3727-93DF-62BDF86FA5A6}</Project>
+      <Name>absl_hash</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\container\absl_hashtablez_sampler.vcxproj">
+      <Project>{8BEC8BD4-DB5B-3FF3-84F7-D92226477E9D}</Project>
+      <Name>absl_hashtablez_sampler</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\numeric\absl_int128.vcxproj">
+      <Project>{6467394A-37ED-37A9-AA16-C92937AFF5A3}</Project>
+      <Name>absl_int128</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_kernel_timeout_internal.vcxproj">
+      <Project>{1336836B-9621-33D0-AA1B-16AB6A8421CD}</Project>
+      <Name>absl_kernel_timeout_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_leak_check.vcxproj">
+      <Project>{A8BDDBC9-07EF-3BD6-88F1-A418AE579512}</Project>
+      <Name>absl_leak_check</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_entry.vcxproj">
+      <Project>{0544C4F5-2DE2-34A7-89B2-5A65D3E0F149}</Project>
+      <Name>absl_log_entry</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_flags.vcxproj">
+      <Project>{B0F8F366-6F80-3B3D-A3F0-E1DABE9B17DC}</Project>
+      <Name>absl_log_flags</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_globals.vcxproj">
+      <Project>{9B9D7C70-CB48-3E71-BA23-93B8C16EEF55}</Project>
+      <Name>absl_log_globals</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_initialize.vcxproj">
+      <Project>{A4AF5D6E-A06B-3206-8539-49E465AEB3DD}</Project>
+      <Name>absl_log_initialize</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_check_op.vcxproj">
+      <Project>{B7EC568E-1829-316A-9433-719BFA74CC49}</Project>
+      <Name>absl_log_internal_check_op</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_conditions.vcxproj">
+      <Project>{9925BE0E-B237-3527-AB92-A627FC27CAF6}</Project>
+      <Name>absl_log_internal_conditions</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_fnmatch.vcxproj">
+      <Project>{BD38F6EA-BE1A-3773-BB20-BDCBA68BEB9A}</Project>
+      <Name>absl_log_internal_fnmatch</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_format.vcxproj">
+      <Project>{505FD740-42C3-3AA3-9700-804FA495D4D4}</Project>
+      <Name>absl_log_internal_format</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_globals.vcxproj">
+      <Project>{9AF27C89-E406-33DF-B663-0A7555E7C375}</Project>
+      <Name>absl_log_internal_globals</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_log_sink_set.vcxproj">
+      <Project>{7C76175B-5FA8-3E17-BD49-BD977EEFD52F}</Project>
+      <Name>absl_log_internal_log_sink_set</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_message.vcxproj">
+      <Project>{18CC5E52-30CE-3E1A-AFFC-C7FE8C11FAAC}</Project>
+      <Name>absl_log_internal_message</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_nullguard.vcxproj">
+      <Project>{6BF7655C-ADD7-34FE-99E4-48D2EAF0B146}</Project>
+      <Name>absl_log_internal_nullguard</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_internal_proto.vcxproj">
+      <Project>{251B7553-44EA-3F29-A6E4-BC80DE33452E}</Project>
+      <Name>absl_log_internal_proto</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_log_severity.vcxproj">
+      <Project>{5AA6279F-A915-3C20-B4B8-54C5AC7F3BE1}</Project>
+      <Name>absl_log_severity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_log_sink.vcxproj">
+      <Project>{81706422-7E7F-38F6-9819-4F7E882817A9}</Project>
+      <Name>absl_log_sink</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_low_level_hash.vcxproj">
+      <Project>{C65EBD60-26DD-39DE-B9ED-7F74A78C804C}</Project>
+      <Name>absl_low_level_hash</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_malloc_internal.vcxproj">
+      <Project>{B8A34EEC-2418-36FF-A751-B8C1DD62CB8D}</Project>
+      <Name>absl_malloc_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\profiling\absl_periodic_sampler.vcxproj">
+      <Project>{038F5F7C-9D97-3367-AE70-B964F4056325}</Project>
+      <Name>absl_periodic_sampler</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_distributions.vcxproj">
+      <Project>{15436F61-D650-30D8-8857-696F40EDAEE8}</Project>
+      <Name>absl_random_distributions</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_distribution_test_util.vcxproj">
+      <Project>{EFF10097-CD6C-310C-87C0-1F351E421668}</Project>
+      <Name>absl_random_internal_distribution_test_util</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_platform.vcxproj">
+      <Project>{75AD8BAD-5C47-3FB7-BA56-CEDFBEC12507}</Project>
+      <Name>absl_random_internal_platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_pool_urbg.vcxproj">
+      <Project>{DF66A39B-0AA5-3C9F-9C0E-C62C5DF0F093}</Project>
+      <Name>absl_random_internal_pool_urbg</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_randen.vcxproj">
+      <Project>{494A02F0-8DAE-3D0C-A01B-4BDB55AF1370}</Project>
+      <Name>absl_random_internal_randen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_randen_hwaes.vcxproj">
+      <Project>{27D95692-953B-39BC-AE02-01C3DD11202C}</Project>
+      <Name>absl_random_internal_randen_hwaes</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_randen_hwaes_impl.vcxproj">
+      <Project>{F528217B-1965-34B7-B95E-51FF1A91A8CF}</Project>
+      <Name>absl_random_internal_randen_hwaes_impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_randen_slow.vcxproj">
+      <Project>{F5900BB7-F288-3424-8BC7-F5252E8D3FE0}</Project>
+      <Name>absl_random_internal_randen_slow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_internal_seed_material.vcxproj">
+      <Project>{4C327351-D972-3354-A663-07CE0FA6FE3A}</Project>
+      <Name>absl_random_internal_seed_material</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_seed_gen_exception.vcxproj">
+      <Project>{48A544D6-5C59-3BE9-A64B-0AE738633D64}</Project>
+      <Name>absl_random_seed_gen_exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\random\absl_random_seed_sequences.vcxproj">
+      <Project>{8225FC18-A231-334C-8C36-0E46315FD550}</Project>
+      <Name>absl_random_seed_sequences</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\container\absl_raw_hash_set.vcxproj">
+      <Project>{67911D77-1F21-3916-A92C-37E076B5CBDB}</Project>
+      <Name>absl_raw_hash_set</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_raw_logging_internal.vcxproj">
+      <Project>{4C6CE62E-C9E4-3387-94E5-902FD54A0588}</Project>
+      <Name>absl_raw_logging_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_scoped_set_env.vcxproj">
+      <Project>{67906890-2FE8-31A8-B084-9674A392D3CF}</Project>
+      <Name>absl_scoped_set_env</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_spinlock_wait.vcxproj">
+      <Project>{912CDEE1-52D2-3224-A183-D320EF4FC6DB}</Project>
+      <Name>absl_spinlock_wait</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_stacktrace.vcxproj">
+      <Project>{04BF1B69-6998-34E1-A1DC-30BF2C337034}</Project>
+      <Name>absl_stacktrace</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\status\absl_status.vcxproj">
+      <Project>{F8BDE13B-58DF-33D7-94C7-81A2A90C93F4}</Project>
+      <Name>absl_status</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\status\absl_statusor.vcxproj">
+      <Project>{2AD946A0-2549-3A4E-B652-FC77746B8A9A}</Project>
+      <Name>absl_statusor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_str_format_internal.vcxproj">
+      <Project>{DC403404-8195-3112-9FDA-F61799A17895}</Project>
+      <Name>absl_str_format_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_strerror.vcxproj">
+      <Project>{66090C19-2DE1-36B4-810C-40C4EAB9D045}</Project>
+      <Name>absl_strerror</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_string_view.vcxproj">
+      <Project>{065484CF-DBAE-3C9B-BBD8-369BD261E73E}</Project>
+      <Name>absl_string_view</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_strings.vcxproj">
+      <Project>{E6F2760A-CF46-3A0F-8908-4A7B40F4E451}</Project>
+      <Name>absl_strings</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_strings_internal.vcxproj">
+      <Project>{DEE4D7E4-1A02-3B34-B76E-2B1CCC34C34F}</Project>
+      <Name>absl_strings_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_symbolize.vcxproj">
+      <Project>{D8A86063-B4F0-323D-A758-5979DE9AB965}</Project>
+      <Name>absl_symbolize</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_synchronization.vcxproj">
+      <Project>{A323D780-F792-3F06-B546-81E4972470AF}</Project>
+      <Name>absl_synchronization</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_throw_delegate.vcxproj">
+      <Project>{DA003E01-71D6-30EE-8B37-EDE3DBCD2B31}</Project>
+      <Name>absl_throw_delegate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_time.vcxproj">
+      <Project>{1E744102-EEB4-30BF-B85F-8CA5324C1186}</Project>
+      <Name>absl_time</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_time_zone.vcxproj">
+      <Project>{7AC6784D-6DED-30A8-B114-01030DD0FDA7}</Project>
+      <Name>absl_time_zone</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\log\absl_vlog_config_internal.vcxproj">
+      <Project>{94E92A4B-003C-36C1-BDB8-EF93E13E158F}</Project>
+      <Name>absl_vlog_config_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\common\dawn_common.vcxproj">
+      <Project>{35CC0A88-1C89-356D-86A5-33A7D9093F5C}</Project>
+      <Name>dawn_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\dawn_glfw.vcxproj">
+      <Project>{60B6EEC4-930A-32E5-8616-BDDA960F3B7E}</Project>
+      <Name>dawn_glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawn_headers.vcxproj">
+      <Project>{0B2C468F-61C4-3AD2-B3EA-5C153F8F80BF}</Project>
+      <Name>dawn_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\dawn_native.vcxproj">
+      <Project>{E0B59FFB-0FFA-3BB4-A59B-332E2F124FDE}</Project>
+      <Name>dawn_native</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\platform\dawn_platform.vcxproj">
+      <Project>{C576ECC3-CCF6-35E9-9026-9D4CC91F0803}</Project>
+      <Name>dawn_platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawn_proc.vcxproj">
+      <Project>{6A1398EC-336F-3696-B165-E190B1E5E2FA}</Project>
+      <Name>dawn_proc</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\utils\dawn_utils.vcxproj">
+      <Project>{4DD90F6F-CCFB-3071-998E-A6A5D96AC6E4}</Project>
+      <Name>dawn_utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\wire\dawn_wire.vcxproj">
+      <Project>{E78465F9-D98B-3DBA-B828-C5098C092F5A}</Project>
+      <Name>dawn_wire</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawncpp_headers.vcxproj">
+      <Project>{572F99AA-EDAD-3A23-9352-982D5B740F80}</Project>
+      <Name>dawncpp_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\glfw\src\glfw.vcxproj">
+      <Project>{96B8AA6F-2FEE-3A89-9D84-868261FCB42E}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_cmd_info_cmd.vcxproj">
+      <Project>{ACACC0FD-0CE8-336A-9CF0-DF25E11D7F0F}</Project>
+      <Name>tint_cmd_info_cmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_cmd_loopy_cmd.vcxproj">
+      <Project>{7082643A-9F08-3608-AFBA-07B775131856}</Project>
+      <Name>tint_cmd_loopy_cmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_cmd_remote_compile_cmd.vcxproj">
+      <Project>{FAC558E7-2642-3A43-AB5C-B300D7267357}</Project>
+      <Name>tint_cmd_remote_compile_cmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_cmd_tint_cmd.vcxproj">
+      <Project>{73DEB2FC-0CFA-3A7C-8087-3F56D0C8900B}</Project>
+      <Name>tint_cmd_tint_cmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\webgpu_dawn.vcxproj">
+      <Project>{8A1760D0-D4F8-35A8-ACDF-02EC1F5A1C07}</Project>
+      <Name>webgpu_dawn</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

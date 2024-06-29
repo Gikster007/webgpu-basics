@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\tint\utils\id\generation_id.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\tint\utils\id\generation_id.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\tint\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D03954E5-EDBC-3A25-B1ED-8127AA9902D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E28A9443-9920-379F-865C-795AFD0F2940}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

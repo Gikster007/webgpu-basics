@@ -1,0 +1,533 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "build-dawn/_deps/webgpu-src/CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "build-dawn/_deps/webgpu-src/CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+      Build started 29/06/2024 21:28:45.
+      
+      Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:00.49
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/3.28.3-msvc11/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "build-dawn/_deps/webgpu-src/CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+      Build started 29/06/2024 21:28:46.
+      
+      Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\3.28.3-msvc11\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:00.47
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/3.28.3-msvc11/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build-dawn/_deps/webgpu-src/CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-147vh1"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-147vh1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-147vh1'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_35df5.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:28:47.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-147vh1\\cmTC_35df5.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_35df5.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-147vh1\\Debug\\".
+          Creating directory "cmTC_35df5.dir\\Debug\\cmTC_35df5.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_35df5.dir\\Debug\\cmTC_35df5.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_35df5.dir\\Debug\\cmTC_35df5.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_35df5.dir\\Debug\\\\" /Fd"cmTC_35df5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_35df5.dir\\Debug\\\\" /Fd"cmTC_35df5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-147vh1\\Debug\\cmTC_35df5.exe" /INCREMENTAL /ILK:"cmTC_35df5.dir\\Debug\\cmTC_35df5.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-147vh1/Debug/cmTC_35df5.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-147vh1/Debug/cmTC_35df5.lib" /MACHINE:X64  /machine:x64 cmTC_35df5.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_35df5.vcxproj -> C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-147vh1\\Debug\\cmTC_35df5.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_35df5.dir\\Debug\\cmTC_35df5.tlog\\unsuccessfulbuild".
+          Touching "cmTC_35df5.dir\\Debug\\cmTC_35df5.tlog\\cmTC_35df5.lastbuildstate".
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-147vh1\\cmTC_35df5.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.66
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build-dawn/_deps/webgpu-src/CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-gl0zha"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-gl0zha"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-gl0zha'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_6aca8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:28:47.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-gl0zha\\cmTC_6aca8.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_6aca8.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-gl0zha\\Debug\\".
+          Creating directory "cmTC_6aca8.dir\\Debug\\cmTC_6aca8.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_6aca8.dir\\Debug\\cmTC_6aca8.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_6aca8.dir\\Debug\\cmTC_6aca8.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6aca8.dir\\Debug\\\\" /Fd"cmTC_6aca8.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6aca8.dir\\Debug\\\\" /Fd"cmTC_6aca8.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-gl0zha\\Debug\\cmTC_6aca8.exe" /INCREMENTAL /ILK:"cmTC_6aca8.dir\\Debug\\cmTC_6aca8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-gl0zha/Debug/cmTC_6aca8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-gl0zha/Debug/cmTC_6aca8.lib" /MACHINE:X64  /machine:x64 cmTC_6aca8.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_6aca8.vcxproj -> C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-gl0zha\\Debug\\cmTC_6aca8.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_6aca8.dir\\Debug\\cmTC_6aca8.tlog\\unsuccessfulbuild".
+          Touching "cmTC_6aca8.dir\\Debug\\cmTC_6aca8.tlog\\cmTC_6aca8.lastbuildstate".
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-gl0zha\\cmTC_6aca8.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.57
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "build-dawn/_deps/dawn-src/third_party/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-7exjaw"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-7exjaw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glfw/CMake/modules"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-7exjaw'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_db4cc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:30:09.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\cmTC_db4cc.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_db4cc.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\Debug\\".
+          Creating directory "cmTC_db4cc.dir\\Debug\\cmTC_db4cc.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_db4cc.dir\\Debug\\cmTC_db4cc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_db4cc.dir\\Debug\\cmTC_db4cc.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_db4cc.dir\\Debug\\\\" /Fd"cmTC_db4cc.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_db4cc.dir\\Debug\\\\" /Fd"cmTC_db4cc.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\src.c"
+          src.c
+        C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\cmTC_db4cc.vcxproj]
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\cmTC_db4cc.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\cmTC_db4cc.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-7exjaw\\cmTC_db4cc.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.41
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "build-dawn/_deps/dawn-src/third_party/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-yu3g96"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-yu3g96"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glfw/CMake/modules"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-yu3g96'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_876a5.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:30:10.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\cmTC_876a5.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_876a5.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\Debug\\".
+          Creating directory "cmTC_876a5.dir\\Debug\\cmTC_876a5.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_876a5.dir\\Debug\\cmTC_876a5.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_876a5.dir\\Debug\\cmTC_876a5.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_876a5.dir\\Debug\\\\" /Fd"cmTC_876a5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_876a5.dir\\Debug\\\\" /Fd"cmTC_876a5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\Debug\\cmTC_876a5.exe" /INCREMENTAL /ILK:"cmTC_876a5.dir\\Debug\\cmTC_876a5.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-yu3g96/Debug/cmTC_876a5.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-yu3g96/Debug/cmTC_876a5.lib" /MACHINE:X64  /machine:x64 cmTC_876a5.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\cmTC_876a5.vcxproj]
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\cmTC_876a5.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\cmTC_876a5.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-yu3g96\\cmTC_876a5.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.64
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "build-dawn/_deps/dawn-src/third_party/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-lfjq98"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-lfjq98"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glfw/CMake/modules"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-lfjq98'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_3537f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:30:11.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\cmTC_3537f.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_3537f.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\Debug\\".
+          Creating directory "cmTC_3537f.dir\\Debug\\cmTC_3537f.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_3537f.dir\\Debug\\cmTC_3537f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_3537f.dir\\Debug\\cmTC_3537f.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3537f.dir\\Debug\\\\" /Fd"cmTC_3537f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3537f.dir\\Debug\\\\" /Fd"cmTC_3537f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\Debug\\cmTC_3537f.exe" /INCREMENTAL /ILK:"cmTC_3537f.dir\\Debug\\cmTC_3537f.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-lfjq98/Debug/cmTC_3537f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-lfjq98/Debug/cmTC_3537f.lib" /MACHINE:X64  /machine:x64 cmTC_3537f.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\cmTC_3537f.vcxproj]
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\cmTC_3537f.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\cmTC_3537f.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-lfjq98\\cmTC_3537f.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.55
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMake/AbseilDll.cmake:633 (check_cxx_source_compiles)"
+      - "build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMakeLists.txt:96 (include)"
+    checks:
+      - "Performing Test ABSL_INTERNAL_AT_LEAST_CXX17"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-8jd7ye"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-8jd7ye"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc /MP"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMake;C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/abseil-cpp/absl/copts"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "ABSL_INTERNAL_AT_LEAST_CXX17"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-8jd7ye'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_27cad.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:30:12.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\cmTC_27cad.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_27cad.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\Debug\\".
+          Creating directory "cmTC_27cad.dir\\Debug\\cmTC_27cad.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_27cad.dir\\Debug\\cmTC_27cad.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_27cad.dir\\Debug\\cmTC_27cad.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /MP /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D ABSL_INTERNAL_AT_LEAST_CXX17 /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"cmTC_27cad.dir\\Debug\\\\" /Fd"cmTC_27cad.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /MP /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D ABSL_INTERNAL_AT_LEAST_CXX17 /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"cmTC_27cad.dir\\Debug\\\\" /Fd"cmTC_27cad.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\src.cxx"
+          src.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\Debug\\cmTC_27cad.exe" /INCREMENTAL /ILK:"cmTC_27cad.dir\\Debug\\cmTC_27cad.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-8jd7ye/Debug/cmTC_27cad.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-8jd7ye/Debug/cmTC_27cad.lib" /MACHINE:X64  /machine:x64 cmTC_27cad.dir\\Debug\\src.obj
+          cmTC_27cad.vcxproj -> C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\Debug\\cmTC_27cad.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_27cad.dir\\Debug\\cmTC_27cad.tlog\\unsuccessfulbuild".
+          Touching "cmTC_27cad.dir\\Debug\\cmTC_27cad.tlog\\cmTC_27cad.lastbuildstate".
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-8jd7ye\\cmTC_27cad.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.58
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMake/AbseilDll.cmake:646 (check_cxx_source_compiles)"
+      - "build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMakeLists.txt:96 (include)"
+    checks:
+      - "Performing Test ABSL_INTERNAL_AT_LEAST_CXX20"
+    directories:
+      source: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-n4r3wo"
+      binary: "C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-n4r3wo"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc /MP"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/abseil-cpp/CMake;C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/abseil-cpp/absl/copts"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "ABSL_INTERNAL_AT_LEAST_CXX20"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/C++/basic-webgpu-app/build-dawn/CMakeFiles/CMakeScratch/TryCompile-n4r3wo'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f077a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+        Build started 29/06/2024 21:30:13.
+        
+        Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\cmTC_f077a.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_f077a.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\Debug\\".
+          Creating directory "cmTC_f077a.dir\\Debug\\cmTC_f077a.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_f077a.dir\\Debug\\cmTC_f077a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_f077a.dir\\Debug\\cmTC_f077a.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /MP /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D ABSL_INTERNAL_AT_LEAST_CXX20 /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"cmTC_f077a.dir\\Debug\\\\" /Fd"cmTC_f077a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.40.33811 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /MP /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D ABSL_INTERNAL_AT_LEAST_CXX20 /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"cmTC_f077a.dir\\Debug\\\\" /Fd"cmTC_f077a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\src.cxx"
+          src.cxx
+        C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\src.cxx(3,1): error C1189: #error:  "The compiler defaults or is configured for C++ < 20" [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\cmTC_f077a.vcxproj]
+        Done Building Project "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\cmTC_f077a.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\cmTC_f077a.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\src.cxx(3,1): error C1189: #error:  "The compiler defaults or is configured for C++ < 20" [C:\\Projects\\C++\\basic-webgpu-app\\build-dawn\\CMakeFiles\\CMakeScratch\\TryCompile-n4r3wo\\cmTC_f077a.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.32
+        
+      exitCode: 1
+...

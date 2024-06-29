@@ -1,0 +1,9 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDependentOption.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/GNUInstallDirs.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake
+C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glslang/src/CHANGES.md
+C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glslang/src/CMakeLists.txt
+C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glslang/src/build_info.h.tmpl
+C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/glslang/src/parse_version.cmake

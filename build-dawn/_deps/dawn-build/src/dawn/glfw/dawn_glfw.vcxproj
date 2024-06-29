@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{60B6EEC4-930A-32E5-8616-BDDA960F3B7E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>dawn_glfw</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dawn_glfw.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dawn_glfw</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dawn_glfw.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dawn_glfw</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dawn_glfw.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dawn_glfw</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dawn_glfw.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dawn_glfw</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_GLFW_IMPLEMENTATION;DAWN_ENABLE_ASSERTS;DAWN_ENABLE_BACKEND_VULKAN;DAWN_USE_WINDOWS_UI;NOMINMAX;WIN32_LEAN_AND_MEAN;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glfw\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\glfw\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/glfw/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/glfw/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/glfw/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/glfw/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/glfw/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/glfw/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/glfw/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/glfw/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\glfw\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\glfw\utils.cpp" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu_enum_class_bitmasks.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\wire\client\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu_cpp_print.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\webgpu\webgpu_cpp_chained_struct.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\wire\client\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\dawn_proc_table.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\ZERO_CHECK.vcxproj">
+      <Project>{8370CD38-94B0-30C0-B70B-A84D7B007236}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_log_severity.vcxproj">
+      <Project>{5AA6279F-A915-3C20-B4B8-54C5AC7F3BE1}</Project>
+      <Name>absl_log_severity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_raw_logging_internal.vcxproj">
+      <Project>{4C6CE62E-C9E4-3387-94E5-902FD54A0588}</Project>
+      <Name>absl_raw_logging_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_throw_delegate.vcxproj">
+      <Project>{DA003E01-71D6-30EE-8B37-EDE3DBCD2B31}</Project>
+      <Name>absl_throw_delegate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\common\dawn_common.vcxproj">
+      <Project>{35CC0A88-1C89-356D-86A5-33A7D9093F5C}</Project>
+      <Name>dawn_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawn_headers.vcxproj">
+      <Project>{0B2C468F-61C4-3AD2-B3EA-5C153F8F80BF}</Project>
+      <Name>dawn_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawncpp_headers.vcxproj">
+      <Project>{572F99AA-EDAD-3A23-9352-982D5B740F80}</Project>
+      <Name>dawncpp_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\glfw\src\glfw.vcxproj">
+      <Project>{96B8AA6F-2FEE-3A89-9D84-868261FCB42E}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

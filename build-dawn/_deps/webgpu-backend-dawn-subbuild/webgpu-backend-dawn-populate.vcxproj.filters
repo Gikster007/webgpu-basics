@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\d4ccd286e210d9a33b2d701a3aa9906c\webgpu-backend-dawn-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\6803f4f05efbea3abb09adc8f880317e\webgpu-backend-dawn-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\a4cff7a3c0a3b9042029f50fe0cb46bf\webgpu-backend-dawn-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\webgpu-backend-dawn-subbuild\CMakeFiles\webgpu-backend-dawn-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3626070B-CF7F-3F69-BD76-48C18A57B6B7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

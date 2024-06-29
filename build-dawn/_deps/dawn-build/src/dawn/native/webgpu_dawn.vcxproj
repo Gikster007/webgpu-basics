@@ -1,0 +1,778 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8A1760D0-D4F8-35A8-ACDF-02EC1F5A1C07}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>webgpu_dawn</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">webgpu_dawn.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">webgpu_dawn</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">webgpu_dawn.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">webgpu_dawn</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">webgpu_dawn.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">webgpu_dawn</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">webgpu_dawn.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">webgpu_dawn</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WGPU_IMPLEMENTATION;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WGPU_IMPLEMENTATION;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WGPU_IMPLEMENTATION;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\partition_alloc;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\vulkan-headers\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\CMakeFiles\860846e034d53e926982f97097b92f37\webgpu_dawn_native_proc.cpp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Dawn: Generating files for Dawn native WebGPU procs.</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\Bolba\AppData\Local\Programs\Python\Python312\python.exe C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/dawn_json_generator.py --template-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/templates --root-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src --output-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/gen --dawn-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn.json --wire-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_wire.json --kotlin-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_kotlin.json --targets webgpu_dawn_native_proc --jinja2-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/jinja2 --markupsafe-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/markupsafe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src\dawn\native\webgpu_dawn_native_proc.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Dawn: Generating files for Dawn native WebGPU procs.</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\Bolba\AppData\Local\Programs\Python\Python312\python.exe C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/dawn_json_generator.py --template-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/templates --root-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src --output-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/gen --dawn-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn.json --wire-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_wire.json --kotlin-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_kotlin.json --targets webgpu_dawn_native_proc --jinja2-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/jinja2 --markupsafe-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/markupsafe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src\dawn\native\webgpu_dawn_native_proc.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Dawn: Generating files for Dawn native WebGPU procs.</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+C:\Users\Bolba\AppData\Local\Programs\Python\Python312\python.exe C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/dawn_json_generator.py --template-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/templates --root-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src --output-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/gen --dawn-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn.json --wire-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_wire.json --kotlin-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_kotlin.json --targets webgpu_dawn_native_proc --jinja2-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/jinja2 --markupsafe-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/markupsafe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src\dawn\native\webgpu_dawn_native_proc.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Dawn: Generating files for Dawn native WebGPU procs.</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+C:\Users\Bolba\AppData\Local\Programs\Python\Python312\python.exe C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/dawn_json_generator.py --template-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/generator/templates --root-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src --output-dir C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/gen --dawn-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn.json --wire-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_wire.json --kotlin-json C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/dawn_kotlin.json --targets webgpu_dawn_native_proc --jinja2-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/jinja2 --markupsafe-path C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/markupsafe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src\dawn\native\webgpu_dawn_native_proc.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\native\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/native/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/native/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.inl;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ProcTable.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_StreamImpl.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\dawn_platform.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/native/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/native/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.inl;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ProcTable.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_StreamImpl.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\dawn_platform.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/native/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/native/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.inl;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ProcTable.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_StreamImpl.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\dawn_platform.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/src/dawn/native/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Projects/C++/basic-webgpu-app -BC:/Projects/C++/basic-webgpu-app/build-dawn --check-stamp-file C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-build/src/dawn/native/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\dawn_json_generator.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\generator_lib.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ChainUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\Features.inl;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ObjectType.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ProcTable.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\ValidationUtils.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_StreamImpl.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_absl_format.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_dawn_native_proc.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.cpp;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\api_structs.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\generator\templates\dawn\native\dawn_platform.h;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_kotlin.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\src\dawn\dawn_wire.json;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\_identifier.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\async_utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\bccache.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\compiler.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\defaults.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\environment.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\exceptions.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\filters.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\idtracking.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\lexer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\loaders.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\nodes.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\optimizer.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\parser.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\runtime.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\tests.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\utils.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\jinja2\visitor.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\__init__.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_compat.py;C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\markupsafe\_native.py;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\src\dawn\native\webgpu_dawn_native_proc.cpp" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\dawn\native\DawnNative.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\dawn\native\dawn_native_export.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\dawn\native\VulkanBackend.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu_enum_class_bitmasks.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\wire\client\webgpu_cpp.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu_cpp_print.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\webgpu\webgpu_cpp_chained_struct.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\wire\client\webgpu.h" />
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\dawn_proc_table.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\ZERO_CHECK.vcxproj">
+      <Project>{8370CD38-94B0-30C0-B70B-A84D7B007236}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.vcxproj">
+      <Project>{6D92CC71-5616-30FD-B67B-B712C6EB647C}</Project>
+      <Name>SPIRV-Tools-opt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\spirv-tools\source\SPIRV-Tools-static.vcxproj">
+      <Project>{1E8C8958-9A9F-35C7-A1E1-10DCB412E90D}</Project>
+      <Name>SPIRV-Tools-static</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\types\absl_bad_optional_access.vcxproj">
+      <Project>{CA4969FA-0576-3767-9473-B7316D6D5FAC}</Project>
+      <Name>absl_bad_optional_access</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\types\absl_bad_variant_access.vcxproj">
+      <Project>{FF43D3CA-0828-3D8C-80EE-6E4A321EC3F7}</Project>
+      <Name>absl_bad_variant_access</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_base.vcxproj">
+      <Project>{4C996C62-00A2-3E59-B37F-D28321A54867}</Project>
+      <Name>absl_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_city.vcxproj">
+      <Project>{2E9CA855-5AFE-3B65-A988-E0053E38963F}</Project>
+      <Name>absl_city</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_civil_time.vcxproj">
+      <Project>{710454D2-8A4A-3118-8DED-B01DBB3B18D1}</Project>
+      <Name>absl_civil_time</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cord.vcxproj">
+      <Project>{FA689950-38A4-306E-96A8-E62392EEE2BF}</Project>
+      <Name>absl_cord</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cord_internal.vcxproj">
+      <Project>{0876788B-6026-3B56-B035-DE5677B5B0FF}</Project>
+      <Name>absl_cord_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_functions.vcxproj">
+      <Project>{238B97FA-816F-3D67-BFF4-59311E272DE8}</Project>
+      <Name>absl_cordz_functions</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_handle.vcxproj">
+      <Project>{2B5811C4-18CB-37BF-A3FA-59A222568FB4}</Project>
+      <Name>absl_cordz_handle</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_cordz_info.vcxproj">
+      <Project>{81A9095C-C42E-3837-A48B-C17247C2E037}</Project>
+      <Name>absl_cordz_info</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc32c.vcxproj">
+      <Project>{82011771-0C49-348C-9A0C-23CB4D4D10A1}</Project>
+      <Name>absl_crc32c</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_cord_state.vcxproj">
+      <Project>{57E2BCED-1EB7-3B13-B5CD-C0EADA6F8152}</Project>
+      <Name>absl_crc_cord_state</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_cpu_detect.vcxproj">
+      <Project>{E0DCC29C-0737-31F4-B405-672B9688C5B5}</Project>
+      <Name>absl_crc_cpu_detect</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\crc\absl_crc_internal.vcxproj">
+      <Project>{D911256D-20E7-36FB-853D-2D8378046FAC}</Project>
+      <Name>absl_crc_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_debugging_internal.vcxproj">
+      <Project>{83D32DE4-D4B9-35B0-BC1F-52853B1A0206}</Project>
+      <Name>absl_debugging_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_demangle_internal.vcxproj">
+      <Project>{96B817B7-228E-318C-ADED-8A9A0CAAC298}</Project>
+      <Name>absl_demangle_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\profiling\absl_exponential_biased.vcxproj">
+      <Project>{9A836C6D-7552-3E83-9BB8-D3ADCA626D37}</Project>
+      <Name>absl_exponential_biased</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_graphcycles_internal.vcxproj">
+      <Project>{F2BB113B-D0EE-3720-B68C-232EF8DA2E1B}</Project>
+      <Name>absl_graphcycles_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_hash.vcxproj">
+      <Project>{F46AE19E-6474-3727-93DF-62BDF86FA5A6}</Project>
+      <Name>absl_hash</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\container\absl_hashtablez_sampler.vcxproj">
+      <Project>{8BEC8BD4-DB5B-3FF3-84F7-D92226477E9D}</Project>
+      <Name>absl_hashtablez_sampler</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\numeric\absl_int128.vcxproj">
+      <Project>{6467394A-37ED-37A9-AA16-C92937AFF5A3}</Project>
+      <Name>absl_int128</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_kernel_timeout_internal.vcxproj">
+      <Project>{1336836B-9621-33D0-AA1B-16AB6A8421CD}</Project>
+      <Name>absl_kernel_timeout_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_log_severity.vcxproj">
+      <Project>{5AA6279F-A915-3C20-B4B8-54C5AC7F3BE1}</Project>
+      <Name>absl_log_severity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\hash\absl_low_level_hash.vcxproj">
+      <Project>{C65EBD60-26DD-39DE-B9ED-7F74A78C804C}</Project>
+      <Name>absl_low_level_hash</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_malloc_internal.vcxproj">
+      <Project>{B8A34EEC-2418-36FF-A751-B8C1DD62CB8D}</Project>
+      <Name>absl_malloc_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\container\absl_raw_hash_set.vcxproj">
+      <Project>{67911D77-1F21-3916-A92C-37E076B5CBDB}</Project>
+      <Name>absl_raw_hash_set</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_raw_logging_internal.vcxproj">
+      <Project>{4C6CE62E-C9E4-3387-94E5-902FD54A0588}</Project>
+      <Name>absl_raw_logging_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_spinlock_wait.vcxproj">
+      <Project>{912CDEE1-52D2-3224-A183-D320EF4FC6DB}</Project>
+      <Name>absl_spinlock_wait</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_stacktrace.vcxproj">
+      <Project>{04BF1B69-6998-34E1-A1DC-30BF2C337034}</Project>
+      <Name>absl_stacktrace</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_str_format_internal.vcxproj">
+      <Project>{DC403404-8195-3112-9FDA-F61799A17895}</Project>
+      <Name>absl_str_format_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_string_view.vcxproj">
+      <Project>{065484CF-DBAE-3C9B-BBD8-369BD261E73E}</Project>
+      <Name>absl_string_view</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_strings.vcxproj">
+      <Project>{E6F2760A-CF46-3A0F-8908-4A7B40F4E451}</Project>
+      <Name>absl_strings</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\strings\absl_strings_internal.vcxproj">
+      <Project>{DEE4D7E4-1A02-3B34-B76E-2B1CCC34C34F}</Project>
+      <Name>absl_strings_internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\debugging\absl_symbolize.vcxproj">
+      <Project>{D8A86063-B4F0-323D-A758-5979DE9AB965}</Project>
+      <Name>absl_symbolize</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\synchronization\absl_synchronization.vcxproj">
+      <Project>{A323D780-F792-3F06-B546-81E4972470AF}</Project>
+      <Name>absl_synchronization</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\base\absl_throw_delegate.vcxproj">
+      <Project>{DA003E01-71D6-30EE-8B37-EDE3DBCD2B31}</Project>
+      <Name>absl_throw_delegate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_time.vcxproj">
+      <Project>{1E744102-EEB4-30BF-B85F-8CA5324C1186}</Project>
+      <Name>absl_time</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\third_party\abseil\absl\time\absl_time_zone.vcxproj">
+      <Project>{7AC6784D-6DED-30A8-B114-01030DD0FDA7}</Project>
+      <Name>absl_time_zone</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\common\dawn_common.vcxproj">
+      <Project>{35CC0A88-1C89-356D-86A5-33A7D9093F5C}</Project>
+      <Name>dawn_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawn_headers.vcxproj">
+      <Project>{0B2C468F-61C4-3AD2-B3EA-5C153F8F80BF}</Project>
+      <Name>dawn_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\native\dawn_native.vcxproj">
+      <Project>{E0B59FFB-0FFA-3BB4-A59B-332E2F124FDE}</Project>
+      <Name>dawn_native</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\platform\dawn_platform.vcxproj">
+      <Project>{C576ECC3-CCF6-35E9-9026-9D4CC91F0803}</Project>
+      <Name>dawn_platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\dawn\dawncpp_headers.vcxproj">
+      <Project>{572F99AA-EDAD-3A23-9352-982D5B740F80}</Project>
+      <Name>dawncpp_headers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_api.vcxproj">
+      <Project>{0D9E5E27-5890-3825-BED5-DC721D23D77D}</Project>
+      <Name>tint_api</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_api_common.vcxproj">
+      <Project>{C9C9D9E9-C03A-342D-8918-50C1CC8AE93E}</Project>
+      <Name>tint_api_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core.vcxproj">
+      <Project>{1F527441-C407-3DBA-B25C-1B6D450BC429}</Project>
+      <Name>tint_lang_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_common.vcxproj">
+      <Project>{B9E8CF84-21D1-3F26-8FA1-6E33E4598C2C}</Project>
+      <Name>tint_lang_core_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_constant.vcxproj">
+      <Project>{635A2412-DF24-346E-AB56-016EA4AD1829}</Project>
+      <Name>tint_lang_core_constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_intrinsic.vcxproj">
+      <Project>{535C5ED6-39D7-38F3-AC80-7BBFFB76EACA}</Project>
+      <Name>tint_lang_core_intrinsic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_ir.vcxproj">
+      <Project>{54F61D59-08A4-3B96-A418-234C400E4D50}</Project>
+      <Name>tint_lang_core_ir</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_ir_transform.vcxproj">
+      <Project>{7DD12DF3-A286-301A-8CE7-7CECD0D2C046}</Project>
+      <Name>tint_lang_core_ir_transform</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_ir_transform_common.vcxproj">
+      <Project>{C0AE3358-D5FA-3C95-9A67-A61F3C122A34}</Project>
+      <Name>tint_lang_core_ir_transform_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_core_type.vcxproj">
+      <Project>{D0FB781B-BE2A-32F6-9B2B-644724BEA19F}</Project>
+      <Name>tint_lang_core_type</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_hlsl_writer_common.vcxproj">
+      <Project>{5B3F0E68-939E-3572-8207-F57C13EE65F8}</Project>
+      <Name>tint_lang_hlsl_writer_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv.vcxproj">
+      <Project>{82DB7EB4-2EF4-3A60-9DD8-2642F4DBA786}</Project>
+      <Name>tint_lang_spirv</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_intrinsic.vcxproj">
+      <Project>{B85C045F-2D2E-3D65-9CCD-615DBCC8A92A}</Project>
+      <Name>tint_lang_spirv_intrinsic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_ir.vcxproj">
+      <Project>{403EBD7E-F748-364F-8409-37D60C8EFA42}</Project>
+      <Name>tint_lang_spirv_ir</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_type.vcxproj">
+      <Project>{BFF36B15-643D-3168-BEC1-B431046A1946}</Project>
+      <Name>tint_lang_spirv_type</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer.vcxproj">
+      <Project>{45DF2015-2743-3602-A6E7-B8B51FD65549}</Project>
+      <Name>tint_lang_spirv_writer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer_ast_printer.vcxproj">
+      <Project>{9A1C19DB-C76C-3524-B647-0E5E96E84276}</Project>
+      <Name>tint_lang_spirv_writer_ast_printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer_ast_raise.vcxproj">
+      <Project>{A95BF5B8-5B90-38D3-A1CE-AE16F79C212D}</Project>
+      <Name>tint_lang_spirv_writer_ast_raise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer_common.vcxproj">
+      <Project>{32FA0465-CD1F-307F-9033-20BE1F6837F8}</Project>
+      <Name>tint_lang_spirv_writer_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer_printer.vcxproj">
+      <Project>{AA6A2E22-58AB-3E25-A54A-AA62B6F83E0B}</Project>
+      <Name>tint_lang_spirv_writer_printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_spirv_writer_raise.vcxproj">
+      <Project>{91DAB49E-9270-3765-B0C2-FBA8A2971DCC}</Project>
+      <Name>tint_lang_spirv_writer_raise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl.vcxproj">
+      <Project>{D1365143-29D0-34BC-AFFB-B2EFCE9DECD8}</Project>
+      <Name>tint_lang_wgsl</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_ast.vcxproj">
+      <Project>{BD5E4D07-A3D4-3D1B-874C-559198F2A193}</Project>
+      <Name>tint_lang_wgsl_ast</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_ast_transform.vcxproj">
+      <Project>{E9D8368E-86E7-392D-B478-99F2C998B84C}</Project>
+      <Name>tint_lang_wgsl_ast_transform</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_common.vcxproj">
+      <Project>{5DA50889-3FB6-3BB3-A8FF-3CE2A5585DDA}</Project>
+      <Name>tint_lang_wgsl_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_features.vcxproj">
+      <Project>{32BC7208-35D7-3F51-B45A-FD0106A91B6F}</Project>
+      <Name>tint_lang_wgsl_features</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_helpers.vcxproj">
+      <Project>{8200E3DF-3AA1-372F-9A18-BBBB5E4B4897}</Project>
+      <Name>tint_lang_wgsl_helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_inspector.vcxproj">
+      <Project>{8CBBC6C3-B241-3E0E-8891-3C5C53E3FF4E}</Project>
+      <Name>tint_lang_wgsl_inspector</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_intrinsic.vcxproj">
+      <Project>{F63250B5-B76E-33B3-AB20-796B11D0513D}</Project>
+      <Name>tint_lang_wgsl_intrinsic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_ir.vcxproj">
+      <Project>{E41A7318-CA75-3F7D-A1AC-96825F1EB1C4}</Project>
+      <Name>tint_lang_wgsl_ir</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_program.vcxproj">
+      <Project>{51081D95-3F26-3B5F-B560-B29A8DCF8AD5}</Project>
+      <Name>tint_lang_wgsl_program</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_reader.vcxproj">
+      <Project>{64B03FBE-5B16-300B-B273-0DFD69EBB2E4}</Project>
+      <Name>tint_lang_wgsl_reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_reader_lower.vcxproj">
+      <Project>{D2A52A70-A693-31D3-A155-A1BC85BEC053}</Project>
+      <Name>tint_lang_wgsl_reader_lower</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_reader_parser.vcxproj">
+      <Project>{6EC0C027-1A88-3A82-84F4-97550402094E}</Project>
+      <Name>tint_lang_wgsl_reader_parser</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_reader_program_to_ir.vcxproj">
+      <Project>{9F96770E-EE55-335A-8995-AF7275D2463D}</Project>
+      <Name>tint_lang_wgsl_reader_program_to_ir</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_resolver.vcxproj">
+      <Project>{242EE0A4-F7EE-3E5F-8B74-5C33F40BF05E}</Project>
+      <Name>tint_lang_wgsl_resolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_sem.vcxproj">
+      <Project>{8658FDE9-6D8D-3436-90D8-6FF1DA2371D4}</Project>
+      <Name>tint_lang_wgsl_sem</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_writer.vcxproj">
+      <Project>{2EF896E8-7B62-3D8A-A3D1-850FE0918D22}</Project>
+      <Name>tint_lang_wgsl_writer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_writer_ast_printer.vcxproj">
+      <Project>{6CAE7B8C-B4DD-328A-8807-F26DB408A0A3}</Project>
+      <Name>tint_lang_wgsl_writer_ast_printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_writer_ir_to_program.vcxproj">
+      <Project>{8F1F87AD-82BE-3A53-BA7A-CE28C23A24D1}</Project>
+      <Name>tint_lang_wgsl_writer_ir_to_program</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_writer_raise.vcxproj">
+      <Project>{23A42668-3ED8-3220-9267-FEC912B87F01}</Project>
+      <Name>tint_lang_wgsl_writer_raise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_lang_wgsl_writer_syntax_tree_printer.vcxproj">
+      <Project>{4A4FEB87-9AE0-3A79-8ACC-C6CB009C8B2D}</Project>
+      <Name>tint_lang_wgsl_writer_syntax_tree_printer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_containers.vcxproj">
+      <Project>{D8D2FDD5-B813-339F-890B-9B3B669E4986}</Project>
+      <Name>tint_utils_containers</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_debug.vcxproj">
+      <Project>{92B1B680-1AFD-3022-B4D1-9DFE9CED9D5E}</Project>
+      <Name>tint_utils_debug</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_diagnostic.vcxproj">
+      <Project>{35A9B628-0D3A-30A3-BEB3-50D12EF3CEC9}</Project>
+      <Name>tint_utils_diagnostic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_generator.vcxproj">
+      <Project>{DC4DE54A-F788-3D97-83AF-6994EF24BCA1}</Project>
+      <Name>tint_utils_generator</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_ice.vcxproj">
+      <Project>{4196D1B7-B391-3A53-8BD5-9B35D56D46EB}</Project>
+      <Name>tint_utils_ice</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_id.vcxproj">
+      <Project>{0313F79B-7439-3CDD-82D0-D054CB6F73CD}</Project>
+      <Name>tint_utils_id</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_macros.vcxproj">
+      <Project>{C625B835-A6E6-3A7E-8D12-0DB8647823FC}</Project>
+      <Name>tint_utils_macros</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_math.vcxproj">
+      <Project>{2A56DD65-FB18-38D2-9B83-FE5BA8FCF8F6}</Project>
+      <Name>tint_utils_math</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_memory.vcxproj">
+      <Project>{DD0A275C-BAB7-3D3C-9031-E9170E2C4116}</Project>
+      <Name>tint_utils_memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_reflection.vcxproj">
+      <Project>{B3CAFC69-6A9E-3773-9460-3F507E93C265}</Project>
+      <Name>tint_utils_reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_result.vcxproj">
+      <Project>{AB1A86B9-955E-33BD-A6F6-14F973F21AD4}</Project>
+      <Name>tint_utils_result</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_rtti.vcxproj">
+      <Project>{EEE1A5EA-1581-3A6A-95B1-385819F08495}</Project>
+      <Name>tint_utils_rtti</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_strconv.vcxproj">
+      <Project>{F49D3A66-D21F-38CC-9857-1F21008311B8}</Project>
+      <Name>tint_utils_strconv</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_symbol.vcxproj">
+      <Project>{2B4F5207-DFC2-3868-B02D-FC8BBE4C8DC0}</Project>
+      <Name>tint_utils_symbol</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_system.vcxproj">
+      <Project>{049F20E1-52E7-3D8B-989A-5BE479DC620E}</Project>
+      <Name>tint_utils_system</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_text.vcxproj">
+      <Project>{86F73366-D3DC-311B-BD83-6560172A4BE7}</Project>
+      <Name>tint_utils_text</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\src\tint\tint_utils_traits.vcxproj">
+      <Project>{D9D8F2F4-A7EC-3023-B3CC-72237FE20455}</Project>
+      <Name>tint_utils_traits</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glslang\src\glslang\ResourceLimits\ResourceLimits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glslang\src\glslang\ResourceLimits\resource_limits_c.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glslang\src\glslang\Public\ResourceLimits.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glslang\src\glslang\Public\resource_limits_c.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\third_party\glslang\src\glslang\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Public">
+      <UniqueIdentifier>{706DFA17-366D-3D5A-8C70-49DC9FAE9FFF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E28A9443-9920-379F-865C-795AFD0F2940}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
