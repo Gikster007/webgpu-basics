@@ -653,7 +653,8 @@ VULKAN_HEADERS_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 VULKAN_HEADERS_SOURCE_DIR:STATIC=C:/Projects/C++/basic-webgpu-app/build-dawn/_deps/dawn-src/third_party/vulkan-headers/src
 
-//Choose the backend for WebGPU-distribution
+//Backend implementation of WebGPU. Possible values are EMSCRIPTEN,
+// WGPU, WGPU_STATIC and DAWN (it does not matter when using emcmake)
 WEBGPU_BACKEND:STRING=DAWN
 
 //Path to the webgpu.idl definition file

@@ -12,9 +12,6 @@ endif()
 # Include FetchContent
 include(FetchContent)
 
-# Set the WEBGPU_BACKEND CMake cache variable
-set(WEBGPU_BACKEND "dawn" CACHE STRING "Choose the backend for WebGPU-distribution")
-
 # Fetch the WebGPU-distribution library
 FetchContent_Declare(
   webgpu
@@ -46,6 +43,19 @@ endif()
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET basic-webgpu-app PROPERTY CXX_STANDARD 20)
 endif()
+
+if (EMSCRIPTEN)
+    # Generate a full web page rather than a simple WebAssembly module
+    set_target_properties(basic-webgpu-app PROPERTIES SUFFIX ".html")
+    # Enable the use of emscripten_sleep()
+    target_link_options(App PRIVATE -sASYNCIFY)
+endif()
+
+# Include the WebGPU headers directory
+target_include_directories(basic-webgpu-app PRIVATE ${webgpu_SOURCE_DIR}/include)
+
+# Link the WebGPU library to your target
+target_link_libraries(basic-webgpu-app PRIVATE webgpu)
 
 # Dynamically link backend
 target_copy_webgpu_binaries(basic-webgpu-app)

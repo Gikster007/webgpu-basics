@@ -6,9 +6,26 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-src\include\webgpu\webgpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\webgpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\wire\client\webgpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Projects\C++\basic-webgpu-app\build-dawn\_deps\dawn-build\gen\include\dawn\dawn_proc_table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="C:\Projects\C++\basic-webgpu-app\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D03954E5-EDBC-3A25-B1ED-8127AA9902D0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{E28A9443-9920-379F-865C-795AFD0F2940}</UniqueIdentifier>
     </Filter>
