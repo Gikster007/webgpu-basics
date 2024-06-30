@@ -8,6 +8,7 @@
 #endif // __EMSCRIPTEN__
 
 #include <webgpu/webgpu.h>
+#include <GLFW/glfw3.h>
 
 #if WEBGPU_BACKEND_WGPU
 #include <webgpu/wgpu.h>
@@ -334,10 +335,49 @@ int main()
     wgpuQueueSubmit(queue, 1, &command);
     wgpuCommandBufferRelease(command);
     std::cout << "Command submitted." << std::endl;
+    for (int i = 0; i < 5; ++i)
+    {
+        std::cout << "Tick/Poll device..." << std::endl;
+#if defined(WEBGPU_BACKEND_DAWN)
+        wgpuDeviceTick(device);
+#elif defined(WEBGPU_BACKEND_WGPU)
+        wgpuDevicePoll(device, false, nullptr);
+#elif defined(WEBGPU_BACKEND_EMSCRIPTEN)
+        emscripten_sleep(100);
+#endif
+    }
 
-    // Cleanu up
-    wgpuDeviceRelease(device);
+    if (!glfwInit())
+    {
+        std::cerr << "Could not initialize GLFW!" << std::endl;
+        return 1;
+    }
+
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); // <-- extra info for glfwCreateWindow
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    GLFWwindow* window = glfwCreateWindow(640, 480, "Basic WebGPU App", nullptr, nullptr);
+
+    if (!window)
+    {
+        std::cerr << "Could not open window!" << std::endl;
+        glfwTerminate();
+        return 1;
+    }
+
+    while (!glfwWindowShouldClose(window))
+    {
+        // Check whether the user clicked on the close button (and any other
+        // mouse/key event, which we don't use so far)
+        glfwPollEvents();
+    }
+
+    // At the end of the program, destroy the window
+    glfwDestroyWindow(window);
+    glfwTerminate();
+
+    // Clean up
     wgpuQueueRelease(queue);
+    wgpuDeviceRelease(device);
 
     printf("Bye Bye, We Are Now Exiting... \n");
     return 0;

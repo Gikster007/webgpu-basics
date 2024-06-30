@@ -20,6 +20,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(webgpu)
 
+# Add glfw
+if (NOT EMSCRIPTEN)
+	add_subdirectory(glfw)
+else()
+	# Emscripten has built-in support for GLFW but requires the `-sUSE_GLFW=3` link option:
+	add_library(glfw INTERFACE)
+	target_link_options(glfw INTERFACE -sUSE_GLFW=3)
+endif()
+
 project ("basic-webgpu-app")
 
 # Add source to this project's executable.
@@ -54,8 +63,8 @@ endif()
 # Include the WebGPU headers directory
 target_include_directories(basic-webgpu-app PRIVATE ${webgpu_SOURCE_DIR}/include)
 
-# Link the WebGPU library to your target
-target_link_libraries(basic-webgpu-app PRIVATE webgpu)
+# Link the WebGPU and GLFW libraries to your target
+target_link_libraries(basic-webgpu-app PRIVATE webgpu glfw)
 
 # Dynamically link backend
 target_copy_webgpu_binaries(basic-webgpu-app)
