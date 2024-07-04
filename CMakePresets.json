@@ -11,7 +11,11 @@
           "displayName": "Visual Studio 2022",
           "description": "Visual Studio 2022 Generator.",
           "generator": "Visual Studio 17 2022",
-          "binaryDir": "${sourceDir}/out/build/${presetName}"
+          "binaryDir": "${sourceDir}/out/build/${presetName}",
+          "cacheVariables": 
+          {
+            "WEBGPU_BACKEND": "DAWN"
+          }
       },
       {
           "name": "emscripten",
