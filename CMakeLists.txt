@@ -1,18 +1,9 @@
-﻿# CMakeList.txt : CMake project for basic-webgpu-app, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.8)
 
-# Enable Hot Reload for MSVC compilers if supported.
-if (POLICY CMP0141)
-  cmake_policy(SET CMP0141 NEW)
-  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
-endif()
+project("webgpu-basics")
 
-# Include FetchContent
 include(FetchContent)
 
-# Fetch the WebGPU-distribution library
 FetchContent_Declare(
   webgpu
   GIT_REPOSITORY https://github.com/eliemichel/WebGPU-distribution
@@ -20,51 +11,24 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(webgpu)
 
-# Add glfw
-if (NOT EMSCRIPTEN)
-	add_subdirectory(glfw)
-else()
-	# Emscripten has built-in support for GLFW but requires the `-sUSE_GLFW=3` link option:
-	add_library(glfw INTERFACE)
-	target_link_options(glfw INTERFACE -sUSE_GLFW=3)
-endif()
-
-project ("basic-webgpu-app")
-
 # Add source to this project's executable.
-add_executable (basic-webgpu-app "src/main.cpp")
+add_executable(webgpu-basics "src/main.cpp")
 
-# Add target properties
-set_target_properties(basic-webgpu-app PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
-    COMPILE_WARNING_AS_ERROR ON
-)
-
-# Catch more warnings
-if (MSVC)
-    target_compile_options(basic-webgpu-app PRIVATE /W4)
+if (NOT EMSCRIPTEN)
+    add_subdirectory(glfw)
 else()
-    target_compile_options(basic-webgpu-app PRIVATE -Wall -Wextra -pedantic)
+    # Emscripten has built-in support for GLFW but requires the `-sUSE_GLFW=3` link option:
+    add_library(glfw INTERFACE)
+    target_link_options(glfw INTERFACE -sUSE_GLFW=3)
 endif()
+
+target_link_libraries(webgpu-basics PRIVATE webgpu glfw)
+
+set(CMAKE_COMPILE_WARNING_AS_ERROR OFF)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET basic-webgpu-app PROPERTY CXX_STANDARD 20)
+  set_property(TARGET webgpu-basics PROPERTY CXX_STANDARD 20)
 endif()
 
-if (EMSCRIPTEN)
-    # Generate a full web page rather than a simple WebAssembly module
-    set_target_properties(basic-webgpu-app PROPERTIES SUFFIX ".html")
-    # Enable the use of emscripten_sleep()
-    target_link_options(App PRIVATE -sASYNCIFY)
-endif()
-
-# Include the WebGPU headers directory
-target_include_directories(basic-webgpu-app PRIVATE ${webgpu_SOURCE_DIR}/include)
-
-# Link the WebGPU and GLFW libraries to your target
-target_link_libraries(basic-webgpu-app PRIVATE webgpu glfw)
-
-# Dynamically link backend
-target_copy_webgpu_binaries(basic-webgpu-app)
+# TODO: Add tests and install targets if needed.
+target_copy_webgpu_binaries(webgpu-basics)

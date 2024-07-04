@@ -1,61 +1,46 @@
 ﻿{
-    "version": 3,
-    "configurePresets": [
-        {
-            "name": "windows-base",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            }
-        },
-        {
-            "name": "x64-debug",
-            "displayName": "x64 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "x64-release",
-            "displayName": "x64 Release",
-            "inherits": "x64-debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        },
-        {
-            "name": "x86-debug",
-            "displayName": "x86 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x86",
-                "strategy": "external"
-            },
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "x86-release",
-            "displayName": "x86 Release",
-            "inherits": "x86-debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        }
-    ]
+  "version": 7,
+  "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 27,
+      "patch": 0
+  },
+  "configurePresets": [
+      {
+          "name": "vs17",
+          "displayName": "Visual Studio 2022",
+          "description": "Visual Studio 2022 Generator.",
+          "generator": "Visual Studio 17 2022",
+          "binaryDir": "${sourceDir}/out/build/${presetName}"
+      },
+      {
+          "name": "emscripten",
+          "displayName": "Emscripten",
+          "generator": "Ninja Multi-Config",
+          "binaryDir": "${sourceDir}/out/build/${presetName}",
+          "toolchainFile": "tools/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+      }
+  ],
+  "buildPresets": [
+      {
+          "name": "Emscripten-Debug",
+          "configurePreset": "emscripten",
+          "configuration": "Debug"
+      },
+      {
+          "name": "Emscripten-Release",
+          "configurePreset": "emscripten",
+          "configuration": "Release"
+      },
+      {
+          "name": "x64-Debug",
+          "configurePreset": "vs17",
+          "configuration": "Debug"
+      },
+      {
+          "name": "x64-Release",
+          "configurePreset": "vs17",
+          "configuration": "Release"
+      }
+  ]
 }
