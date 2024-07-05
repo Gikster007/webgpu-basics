@@ -15,22 +15,22 @@ class Application
 {
   public:
     // Initialize everything and return true if it went all right
-    bool Initialize();
+    bool initialize();
 
     // Uninitialize everything that was initialized
-    void Terminate();
+    void terminate();
 
     // Draw a frame and handle events
-    void MainLoop();
+    void tick();
 
     // Return true as long as the main loop should keep on running
-    bool IsRunning();
+    bool is_running();
 
   private:
-    TextureView GetNextSurfaceTextureView();
+    TextureView get_next_surface_texture_view();
 
     // Substep of Initialize() that creates the render pipeline
-    void InitializePipeline();
+    void initialize_pipeline();
 
   private:
     // We put here all the variables that are shared between init and main loop
@@ -38,7 +38,7 @@ class Application
     Device device;
     Queue queue;
     Surface surface;
-    std::unique_ptr<ErrorCallback> uncapturedErrorCallbackHandle;
-    TextureFormat surfaceFormat = TextureFormat::Undefined;
+    std::unique_ptr<ErrorCallback> uncaptured_error_callback_handle;
+    TextureFormat surface_format = TextureFormat::Undefined;
     RenderPipeline pipeline;
 };

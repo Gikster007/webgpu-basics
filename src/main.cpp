@@ -5,7 +5,7 @@ int main()
 {
     Application app;
 
-    if (!app.Initialize())
+    if (!app.initialize())
     {
         return 1;
     }
@@ -14,13 +14,13 @@ int main()
     // Equivalent of the main loop when using Emscripten:
     auto callback = [](void* arg) {
         Application* pApp = reinterpret_cast<Application*>(arg);
-        pApp->MainLoop(); // 4. We can use the application object
+        pApp->tick(); // 4. We can use the application object
     };
     emscripten_set_main_loop_arg(callback, &app, 0, true);
 #else  // __EMSCRIPTEN__
-    while (app.IsRunning())
+    while (app.is_running())
     {
-        app.MainLoop();
+        app.tick();
     }
 #endif // __EMSCRIPTEN__
 
