@@ -2,24 +2,48 @@
 
 // We embbed the source of the shader module here
 const char* shader_source = R"(
+struct VertexInput {
+    @location(0) position: vec2f,
+    @location(1) color: vec3f,
+};
+
+struct VertexOutput {
+    @builtin(position) position: vec4f,
+    // The location here does not refer to a vertex attribute, it just means
+    // that this field must be handled by the rasterizer.
+    // (It can also refer to another field of another struct that would be used
+    // as input to the fragment shader.)
+    @location(0) color: vec3f,
+};
+
 @vertex
-fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> @builtin(position) vec4f {
-	var p = vec2f(0.0, 0.0);
-	if (in_vertex_index == 0u) {
-		p = vec2f(-0.5, -0.5);
-	} else if (in_vertex_index == 1u) {
-		p = vec2f(0.5, -0.5);
-	} else {
-		p = vec2f(0.0, 0.5);
-	}
-	return vec4f(p, 0.0, 1.0);
+fn vs_main(in: VertexInput) -> VertexOutput {
+    var out: VertexOutput; // Create the output struct
+    out.position = vec4f(in.position, 0.0, 1.0);
+    out.color = in.color; // Send input color over to frag shader
+    return out;
 }
 
 @fragment
-fn fs_main() -> @location(0) vec4f {
-	return vec4f(0.0, 0.4, 1.0, 1.0);
+fn fs_main(in: VertexOutput) -> @location(0) vec4f {
+	return vec4f(in.color, 1.0);
 }
 )";
+
+// We define a function that hides implementation-specific variants of device polling:
+void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yieldToWebBrowser)
+{
+#if defined(WEBGPU_BACKEND_DAWN)
+    device.tick();
+#elif defined(WEBGPU_BACKEND_WGPU)
+    device.poll(false);
+#elif defined(WEBGPU_BACKEND_EMSCRIPTEN)
+    if (yieldToWebBrowser)
+    {
+        emscripten_sleep(100);
+    }
+#endif
+}
 
 bool Application::initialize()
 {
@@ -53,12 +77,16 @@ bool Application::initialize()
     device_desc.defaultQueue.nextInChain = nullptr;
     device_desc.defaultQueue.label = "The default queue";
     device_desc.deviceLostCallback = [](WGPUDeviceLostReason reason, char const* message,
-                                       void* /* pUserData */) {
+                                        void* /* pUserData */) {
         std::cout << "Device lost: reason " << reason;
         if (message)
             std::cout << " (" << message << ")";
         std::cout << std::endl;
     };
+
+    RequiredLimits requiredLimits = get_required_limits(adapter);
+    device_desc.requiredLimits = &requiredLimits;
+
     device = adapter.requestDevice(device_desc);
     assert(device && "CRITICAL: Device failed to initialise");
     std::cout << "Got device: " << device << std::endl;
@@ -94,16 +122,101 @@ bool Application::initialize()
     surface.configure(config);
     assert(surface && "CRITICAL: Surface failed to Configure");
 
+    SupportedLimits supported_limits;
+
+    adapter.getLimits(&supported_limits);
+    std::cout << "adapter.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
+              << std::endl;
+
+    device.getLimits(&supported_limits);
+    std::cout << "device.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
+              << std::endl;
+
+    initialize_pipeline();
+
     // Release the adapter only after it has been fully utilized
     adapter.release();
 
-    initialize_pipeline();
+    BufferDescriptor buffer_desc;
+    buffer_desc.label = "Some GPU-side data buffer";
+    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::CopySrc;
+    buffer_desc.size = 16;
+    buffer_desc.mappedAtCreation = false;
+    Buffer buffer1 = device.createBuffer(buffer_desc);
+
+    buffer_desc.label = "Output buffer";
+    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::MapRead;
+    Buffer buffer2 = device.createBuffer(buffer_desc);
+
+    // Create some CPU-side data buffer (of size 16 bytes)
+    std::vector<uint8_t> numbers(16);
+    for (uint8_t i = 0; i < 16; ++i)
+        numbers[i] = i; // `numbers` now contains [ 0, 1, 2, ... ]
+
+    // Copy this from `numbers` (RAM) to `buffer1` (VRAM)
+    queue.writeBuffer(buffer1, 0, numbers.data(), numbers.size());
+
+    CommandEncoder encoder = device.createCommandEncoder(Default);
+
+    encoder.copyBufferToBuffer(buffer1, 0, buffer2, 0, 16);
+
+    CommandBuffer command = encoder.finish(Default);
+    encoder.release();
+    queue.submit(1, &command);
+    command.release();
+
+    // The context shared between this main function and the callback.
+    struct Context
+    {
+        bool ready;
+        Buffer buffer;
+    };
+
+    auto on_buffer2_mapped = [](WGPUBufferMapAsyncStatus status, void* p_user_data) {
+        Context* context = reinterpret_cast<Context*>(p_user_data);
+        context->ready = true;
+        std::cout << "Buffer 2 mapped with status " << status << std::endl;
+        if (status != BufferMapAsyncStatus::Success)
+            return;
+
+        // Get a pointer to wherever the driver mapped the GPU memory to the RAM
+        uint8_t* bufferData = (uint8_t*)context->buffer.getConstMappedRange(0, 16);
+
+        std::cout << "bufferData = [";
+        for (int i = 0; i < 16; ++i)
+        {
+            if (i > 0)
+                std::cout << ", ";
+            std::cout << (int)bufferData[i];
+        }
+        std::cout << "]" << std::endl;
+
+        // Then do not forget to unmap the memory
+        context->buffer.unmap();
+    };
+
+    // Create the Context instance
+    Context context = {false, buffer2};
+
+    wgpuBufferMapAsync(buffer2, MapMode::Read, 0, 16, on_buffer2_mapped, (void*)&context);
+
+    while (!context.ready)
+    {
+        wgpu_poll_events(device, true /* yieldToBrowser */);
+    }
+
+    initialize_buffers();
+
+    buffer1.release();
+    buffer2.release();
 
     return true;
 }
 
 void Application::terminate()
 {
+    position_buffer.release();
+    color_buffer.release();
     pipeline.release();
     surface.unconfigure();
     queue.release();
@@ -136,7 +249,7 @@ void Application::tick()
     render_pass_color_attachment.resolveTarget = nullptr;
     render_pass_color_attachment.loadOp = LoadOp::Clear;
     render_pass_color_attachment.storeOp = StoreOp::Store;
-    render_pass_color_attachment.clearValue = WGPUColor{0.6, 0.1, 0.4, 1.0};
+    render_pass_color_attachment.clearValue = WGPUColor{0.1f, 0.1f, 0.1f, 1.0f};
 #ifndef WEBGPU_BACKEND_WGPU
     render_pass_color_attachment.depthSlice = WGPU_DEPTH_SLICE_UNDEFINED;
 #endif // NOT WEBGPU_BACKEND_WGPU
@@ -150,8 +263,13 @@ void Application::tick()
 
     // Select which render pipeline to use
     render_pass.setPipeline(pipeline);
-    // Draw 1 instance of a 3-vertices shape
-    render_pass.draw(3, 1, 0, 0);
+
+    // Set vertex buffer while encoding the render pass
+    render_pass.setVertexBuffer(0, position_buffer, 0, position_buffer.getSize());
+    render_pass.setVertexBuffer(1, color_buffer, 0, color_buffer.getSize());
+
+    // We use the `vertexCount` variable instead of hard-coding the vertex count
+    render_pass.draw(vertex_count, 1, 0, 0);
 
     render_pass.end();
     render_pass.release();
@@ -211,6 +329,90 @@ TextureView Application::get_next_surface_texture_view()
     return target_view;
 }
 
+RequiredLimits Application::get_required_limits(Adapter adapter) const
+{
+    // Get adapter supported limits, in case we need them
+    SupportedLimits supported_limits;
+    adapter.getLimits(&supported_limits);
+
+    // Don't forget to = Default
+    RequiredLimits required_limits = Default;
+
+    // We use at most 1 vertex attribute for now
+    required_limits.limits.maxVertexAttributes = 2;
+    // We should also tell that we use 1 vertex buffers
+    required_limits.limits.maxVertexBuffers = 2;
+    // Maximum size of a buffer is 6 vertices of 2 float each
+    required_limits.limits.maxBufferSize = 6 * 3 * sizeof(float);
+    // Maximum stride between 2 consecutive vertices in the vertex buffer
+    required_limits.limits.maxVertexBufferArrayStride = 3 * sizeof(float);
+    // This must be set even if we do not use storage buffers for now
+    required_limits.limits.minStorageBufferOffsetAlignment =
+        supported_limits.limits.minStorageBufferOffsetAlignment;
+    // There is a maximum of 3 float forwarded from vertex to fragment shader
+    required_limits.limits.maxInterStageShaderComponents = 3;
+
+    return required_limits;
+}
+
+void Application::initialize_buffers()
+{
+    // Vertex buffer data
+    // There are 2 floats per vertex, one for x and one for y.
+    // But in the end this is just a bunch of floats to the eyes of the GPU,
+    // the *layout* will tell how to interpret this.
+    // (0.0f, 0.0f) is the center of the screen
+    std::vector<float> position_data = {
+        // Define a first triangle:
+        /*-0.5, -0.5, 
+        +0.5, -0.5, 
+        +0.0, +0.5,*/
+
+        // Add a second triangle:
+        /*-0.55f, -0.5, 
+        -0.05f, +0.5, 
+        -0.55f, +0.5*/
+
+        -0.5f, -0.5f,
+        -0.5f, +0.5f,
+        +0.5f, +0.5f,
+
+        -0.5f, -0.5f,
+        +0.5f, -0.5f,
+        +0.5f, +0.5f
+    };
+
+    // r0,  g0,  b0, r1,  g1,  b1, ...
+    std::vector<float> color_data = {
+        1.0, 0.0, 0.0, 
+        0.0, 1.0, 0.0, 
+        0.0, 0.0, 1.0,
+        
+        1.0, 0.0, 0.0, 
+        1.0, 1.0, 0.0, 
+        0.0, 0.0, 1.0
+    };
+
+    // We will declare vertex_count as a member of the Application class
+    vertex_count = static_cast<uint32_t>(position_data.size() / 2);
+    assert(vertex_count == static_cast<uint32_t>(color_data.size() / 3) && "Amount of Positions doesn't match Amount of Colors");
+
+    // Create vertex buffer
+    BufferDescriptor buffer_desc;
+    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Vertex;
+    buffer_desc.mappedAtCreation = false;
+
+    buffer_desc.label = "Vertex Postition";
+    buffer_desc.size = position_data.size() * sizeof(float);
+    position_buffer = device.createBuffer(buffer_desc);
+    queue.writeBuffer(position_buffer, 0, position_data.data(), buffer_desc.size);
+
+    buffer_desc.label = "Vertex Color";
+    buffer_desc.size = color_data.size() * sizeof(float);
+    color_buffer = device.createBuffer(buffer_desc);
+    queue.writeBuffer(color_buffer, 0, color_data.data(), buffer_desc.size);
+}
+
 void Application::initialize_pipeline()
 {
     std::cout << "Initializing Pipeline" << std::endl;
@@ -236,9 +438,34 @@ void Application::initialize_pipeline()
     // Create the render pipeline
     RenderPipelineDescriptor pipeline_desc;
 
-    // We do not use any vertex buffer for this first simplistic example
-    pipeline_desc.vertex.bufferCount = 0;
-    pipeline_desc.vertex.buffers = nullptr;
+    // We now have 2 attributes
+    std::vector<VertexBufferLayout> vertex_buffer_layouts(2);
+
+    // Position attribute
+    VertexAttribute position_attrib;
+    position_attrib.shaderLocation = 0;               // @location(0)
+    position_attrib.format = VertexFormat::Float32x2; // size of position
+    position_attrib.offset = 0;
+
+    vertex_buffer_layouts[0].attributeCount = 1;
+    vertex_buffer_layouts[0].attributes = &position_attrib;
+    vertex_buffer_layouts[0].arrayStride = 2 * sizeof(float); // stride = size of position
+    vertex_buffer_layouts[0].stepMode = VertexStepMode::Vertex;
+
+    // Color attribute
+    VertexAttribute color_attrib;
+    color_attrib.shaderLocation = 1;               // @location(1)
+    color_attrib.format = VertexFormat::Float32x3; // size of color
+    color_attrib.offset = 0;
+
+    vertex_buffer_layouts[1].attributeCount = 1;
+    vertex_buffer_layouts[1].attributes = &color_attrib;
+    vertex_buffer_layouts[1].arrayStride = 3 * sizeof(float); // stride = size of color
+    vertex_buffer_layouts[1].stepMode = VertexStepMode::Vertex;
+
+
+    pipeline_desc.vertex.bufferCount = static_cast<uint32_t>(vertex_buffer_layouts.size());
+    pipeline_desc.vertex.buffers = vertex_buffer_layouts.data();
 
     // NB: We define the 'shader_module' in the second part of this chapter.
     // Here we tell that the programmable vertex shader stage is described
@@ -311,4 +538,6 @@ void Application::initialize_pipeline()
 
     // We no longer need to access the shader module
     shader_module.release();
+
+    std::cout << "Pipeline Initialized!" << std::endl;
 }

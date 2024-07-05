@@ -29,6 +29,10 @@ class Application
   private:
     TextureView get_next_surface_texture_view();
 
+    RequiredLimits get_required_limits(Adapter adapter) const;
+
+    void initialize_buffers();
+   
     // Substep of Initialize() that creates the render pipeline
     void initialize_pipeline();
 
@@ -41,4 +45,9 @@ class Application
     std::unique_ptr<ErrorCallback> uncaptured_error_callback_handle;
     TextureFormat surface_format = TextureFormat::Undefined;
     RenderPipeline pipeline;
+
+    // Application attributes
+    Buffer position_buffer;
+    Buffer color_buffer;
+    uint32_t vertex_count;
 };

@@ -24,5 +24,7 @@ int main()
     }
 #endif // __EMSCRIPTEN__
 
+    app.terminate();
+
     return 0;
 }
