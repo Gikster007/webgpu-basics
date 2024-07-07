@@ -9,7 +9,10 @@
 #include <emscripten.h>
 #endif // __EMSCRIPTEN__
 
+#include <filesystem>
+
 using namespace wgpu;
+namespace fs = std::filesystem;
 
 class Application
 {
@@ -33,6 +36,9 @@ class Application
 
     void initialize_buffers();
    
+    bool load_geometry(const fs::path& path, std::vector<float>& pointData,
+                       std::vector<uint16_t>& indexData);
+
     // Substep of Initialize() that creates the render pipeline
     void initialize_pipeline();
 
@@ -47,7 +53,8 @@ class Application
     RenderPipeline pipeline;
 
     // Application attributes
-    Buffer position_buffer;
+    Buffer point_buffer;
     Buffer color_buffer;
-    uint32_t vertex_count;
+    Buffer index_buffer;
+    uint32_t index_count;
 };

@@ -1,5 +1,8 @@
 #include "app.h"
 
+#include <fstream>
+#include <sstream>
+
 // We embbed the source of the shader module here
 const char* shader_source = R"(
 struct VertexInput {
@@ -18,8 +21,9 @@ struct VertexOutput {
 
 @vertex
 fn vs_main(in: VertexInput) -> VertexOutput {
+    let ratio = 1920.0 / 1080.0; // The width and height of the target surface
     var out: VertexOutput; // Create the output struct
-    out.position = vec4f(in.position, 0.0, 1.0);
+    out.position = vec4f(in.position.x, in.position.y * ratio, 0.0, 1.0);
     out.color = in.color; // Send input color over to frag shader
     return out;
 }
@@ -43,6 +47,75 @@ void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yiel
         emscripten_sleep(100);
     }
 #endif
+}
+
+bool Application::load_geometry(const fs::path& path, std::vector<float>& point_data,
+                  std::vector<uint16_t>& index_data)
+{
+    std::ifstream file(path);
+    if (!file.is_open())
+    {
+        return false;
+    }
+
+    point_data.clear();
+    index_data.clear();
+
+    enum class Section
+    {
+        None,
+        Points,
+        Indices,
+    };
+    Section current_section = Section::None;
+
+    float value;
+    uint16_t index;
+    std::string line;
+    while (!file.eof())
+    {
+        getline(file, line);
+
+        // overcome the `CRLF` problem
+        if (!line.empty() && line.back() == '\r')
+        {
+            line.pop_back();
+        }
+
+        if (line == "[points]")
+        {
+            current_section = Section::Points;
+        }
+        else if (line == "[indices]")
+        {
+            current_section = Section::Indices;
+        }
+        else if (line[0] == '#' || line.empty())
+        {
+            // Do nothing, this is a comment
+        }
+        else if (current_section == Section::Points)
+        {
+            std::istringstream iss(line);
+            // Get x, y, r, g, b
+            for (int i = 0; i < 5; ++i)
+            {
+                iss >> value;
+                point_data.push_back(value);
+            }
+        }
+        else if (current_section == Section::Indices)
+        {
+            std::istringstream iss(line);
+            // Get corners #0 #1 and #2
+            for (int i = 0; i < 3; ++i)
+            {
+                iss >> index;
+                index_data.push_back(index);
+            }
+        }
+    }
+    return true;
 }
 
 bool Application::initialize()
@@ -215,7 +288,8 @@ bool Application::initialize()
 
 void Application::terminate()
 {
-    position_buffer.release();
+    index_buffer.release();
+    point_buffer.release();
     color_buffer.release();
     pipeline.release();
     surface.unconfigure();
@@ -265,11 +339,14 @@ void Application::tick()
     render_pass.setPipeline(pipeline);
 
     // Set vertex buffer while encoding the render pass
-    render_pass.setVertexBuffer(0, position_buffer, 0, position_buffer.getSize());
+    render_pass.setVertexBuffer(0, point_buffer, 0, point_buffer.getSize());
     render_pass.setVertexBuffer(1, color_buffer, 0, color_buffer.getSize());
+    // The second argument must correspond to the choice of uint16_t or uint32_t
+    // we've done when creating the index buffer.
+    render_pass.setIndexBuffer(index_buffer, IndexFormat::Uint16, 0, index_buffer.getSize());
 
     // We use the `vertexCount` variable instead of hard-coding the vertex count
-    render_pass.draw(vertex_count, 1, 0, 0);
+    render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
     render_pass.end();
     render_pass.release();
@@ -343,7 +420,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // We should also tell that we use 1 vertex buffers
     required_limits.limits.maxVertexBuffers = 2;
     // Maximum size of a buffer is 6 vertices of 2 float each
-    required_limits.limits.maxBufferSize = 6 * 3 * sizeof(float);
+    required_limits.limits.maxBufferSize = 15 * 5 * sizeof(float);
     // Maximum stride between 2 consecutive vertices in the vertex buffer
     required_limits.limits.maxVertexBufferArrayStride = 3 * sizeof(float);
     // This must be set even if we do not use storage buffers for now
@@ -362,24 +439,11 @@ void Application::initialize_buffers()
     // But in the end this is just a bunch of floats to the eyes of the GPU,
     // the *layout* will tell how to interpret this.
     // (0.0f, 0.0f) is the center of the screen
-    std::vector<float> position_data = {
-        // Define a first triangle:
-        /*-0.5, -0.5, 
-        +0.5, -0.5, 
-        +0.0, +0.5,*/
-
-        // Add a second triangle:
-        /*-0.55f, -0.5, 
-        -0.05f, +0.5, 
-        -0.55f, +0.5*/
-
-        -0.5f, -0.5f,
-        -0.5f, +0.5f,
-        +0.5f, +0.5f,
-
+    std::vector<float> point_data = {
         -0.5f, -0.5f,
         +0.5f, -0.5f,
-        +0.5f, +0.5f
+        +0.5f, +0.5f,
+        -0.5f, +0.5f
     };
 
     // r0,  g0,  b0, r1,  g1,  b1, ...
@@ -387,30 +451,43 @@ void Application::initialize_buffers()
         1.0, 0.0, 0.0, 
         0.0, 1.0, 0.0, 
         0.0, 0.0, 1.0,
-        
-        1.0, 0.0, 0.0, 
-        1.0, 1.0, 0.0, 
-        0.0, 0.0, 1.0
+        1.0, 1.0, 0.0,
+    };
+
+    // Define index data
+    // This is a list of indices referencing positions in the point_data
+    std::vector<uint16_t> index_data = {
+        0, 1, 2, // Triangle #0 connects points #0, #1 and #2
+        0, 2, 3  // Triangle #1 connects points #0, #2 and #3
     };
 
     // We will declare vertex_count as a member of the Application class
-    vertex_count = static_cast<uint32_t>(position_data.size() / 2);
-    assert(vertex_count == static_cast<uint32_t>(color_data.size() / 3) && "Amount of Positions doesn't match Amount of Colors");
+    index_count = static_cast<uint32_t>(index_data.size());
+    assert(static_cast<uint32_t>(point_data.size() / 2) == static_cast<uint32_t>(color_data.size() / 3) &&
+           "Amount of Positions doesn't match Amount of Colors");
 
-    // Create vertex buffer
+    // Create buffer descriptor
     BufferDescriptor buffer_desc;
     buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Vertex;
     buffer_desc.mappedAtCreation = false;
 
+    // Create vertex buffer
     buffer_desc.label = "Vertex Postition";
-    buffer_desc.size = position_data.size() * sizeof(float);
-    position_buffer = device.createBuffer(buffer_desc);
-    queue.writeBuffer(position_buffer, 0, position_data.data(), buffer_desc.size);
+    buffer_desc.size = point_data.size() * sizeof(float);
+    point_buffer = device.createBuffer(buffer_desc);
+    queue.writeBuffer(point_buffer, 0, point_data.data(), buffer_desc.size);
 
     buffer_desc.label = "Vertex Color";
     buffer_desc.size = color_data.size() * sizeof(float);
     color_buffer = device.createBuffer(buffer_desc);
     queue.writeBuffer(color_buffer, 0, color_data.data(), buffer_desc.size);
+
+    // Create index buffer
+    buffer_desc.size = index_data.size() * sizeof(uint16_t);
+    buffer_desc.size = (buffer_desc.size + 3) & ~3; // round up to the next multiple of 4
+    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Index;
+    index_buffer = device.createBuffer(buffer_desc);
+    queue.writeBuffer(index_buffer, 0, index_data.data(), buffer_desc.size);
 }
 
 void Application::initialize_pipeline()
