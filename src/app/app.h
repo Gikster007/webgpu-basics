@@ -35,12 +35,14 @@ class Application
     RequiredLimits get_required_limits(Adapter adapter) const;
 
     void initialize_buffers();
+
+    void initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc,
+                             BindGroupLayout& bind_group_layout);
    
     bool load_geometry(const fs::path& path, std::vector<float>& pointData,
                        std::vector<uint16_t>& indexData);
 
-    // Substep of Initialize() that creates the render pipeline
-    void initialize_pipeline();
+    ShaderModule load_shader_module(const fs::path& path, Device device);
 
   private:
     // We put here all the variables that are shared between init and main loop
@@ -51,10 +53,11 @@ class Application
     std::unique_ptr<ErrorCallback> uncaptured_error_callback_handle;
     TextureFormat surface_format = TextureFormat::Undefined;
     RenderPipeline pipeline;
+    BindGroup bind_group;
 
     // Application attributes
     Buffer point_buffer;
-    Buffer color_buffer;
     Buffer index_buffer;
+    Buffer uniform_buffer;
     uint32_t index_count;
 };

@@ -3,37 +3,6 @@
 #include <fstream>
 #include <sstream>
 
-// We embbed the source of the shader module here
-const char* shader_source = R"(
-struct VertexInput {
-    @location(0) position: vec2f,
-    @location(1) color: vec3f,
-};
-
-struct VertexOutput {
-    @builtin(position) position: vec4f,
-    // The location here does not refer to a vertex attribute, it just means
-    // that this field must be handled by the rasterizer.
-    // (It can also refer to another field of another struct that would be used
-    // as input to the fragment shader.)
-    @location(0) color: vec3f,
-};
-
-@vertex
-fn vs_main(in: VertexInput) -> VertexOutput {
-    let ratio = 1920.0 / 1080.0; // The width and height of the target surface
-    var out: VertexOutput; // Create the output struct
-    out.position = vec4f(in.position.x, in.position.y * ratio, 0.0, 1.0);
-    out.color = in.color; // Send input color over to frag shader
-    return out;
-}
-
-@fragment
-fn fs_main(in: VertexOutput) -> @location(0) vec4f {
-	return vec4f(in.color, 1.0);
-}
-)";
-
 // We define a function that hides implementation-specific variants of device polling:
 void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yieldToWebBrowser)
 {
@@ -116,6 +85,34 @@ bool Application::load_geometry(const fs::path& path, std::vector<float>& point_
         }
     }
     return true;
+}
+
+ShaderModule Application::load_shader_module(const fs::path& path, Device device)
+{
+    std::ifstream file(path);
+    if (!file.is_open())
+    {
+        return nullptr;
+    }
+    file.seekg(0, std::ios::end);
+    size_t size = file.tellg();
+    std::string shader_source(size, ' ');
+    file.seekg(0);
+    file.read(shader_source.data(), size);
+
+    ShaderModuleWGSLDescriptor shader_code_desc{};
+    shader_code_desc.chain.next = nullptr;
+    shader_code_desc.chain.sType = SType::ShaderModuleWGSLDescriptor;
+    shader_code_desc.code = shader_source.c_str();
+
+    ShaderModuleDescriptor shader_desc{};
+#ifdef WEBGPU_BACKEND_WGPU
+    shader_desc.hintCount = 0;
+    shader_desc.hints = nullptr;
+#endif
+    shader_desc.nextInChain = &shader_code_desc.chain;
+
+    return device.createShaderModule(shader_desc);
 }
 
 bool Application::initialize()
@@ -205,7 +202,11 @@ bool Application::initialize()
     std::cout << "device.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
               << std::endl;
 
-    initialize_pipeline();
+    // Layout for Uniform Buffer binding
+    BindGroupLayoutDescriptor bind_group_layout_desc;
+    BindGroupLayout bind_group_layout;
+
+    initialize_pipeline(bind_group_layout_desc, bind_group_layout);
 
     // Release the adapter only after it has been fully utilized
     adapter.release();
@@ -280,6 +281,26 @@ bool Application::initialize()
 
     initialize_buffers();
 
+     // Create a binding
+    BindGroupEntry binding;
+    // The index of the binding (the entries in bind_group_desc can be in any order)
+    binding.binding = 0;
+    // The buffer it is actually bound to
+    binding.buffer = uniform_buffer;
+    // We can specify an offset within the buffer, so that a single buffer can hold
+    // multiple uniform blocks.
+    binding.offset = 0;
+    // And we specify again the size of the buffer.
+    binding.size = sizeof(float);
+
+    // A bind group contains one or multiple bindings
+    BindGroupDescriptor bind_group_desc;
+    bind_group_desc.layout = bind_group_layout;
+    // There must be as many bindings as declared in the layout!
+    bind_group_desc.entryCount = bind_group_layout_desc.entryCount;
+    bind_group_desc.entries = &binding;
+    bind_group = device.createBindGroup(bind_group_desc);
+
     buffer1.release();
     buffer2.release();
 
@@ -290,7 +311,6 @@ void Application::terminate()
 {
     index_buffer.release();
     point_buffer.release();
-    color_buffer.release();
     pipeline.release();
     surface.unconfigure();
     queue.release();
@@ -340,13 +360,21 @@ void Application::tick()
 
     // Set vertex buffer while encoding the render pass
     render_pass.setVertexBuffer(0, point_buffer, 0, point_buffer.getSize());
-    render_pass.setVertexBuffer(1, color_buffer, 0, color_buffer.getSize());
     // The second argument must correspond to the choice of uint16_t or uint32_t
     // we've done when creating the index buffer.
     render_pass.setIndexBuffer(index_buffer, IndexFormat::Uint16, 0, index_buffer.getSize());
 
+    // Set binding group
+    render_pass.setBindGroup(0, bind_group, 0, nullptr);
+
     // We use the `vertexCount` variable instead of hard-coding the vertex count
     render_pass.drawIndexed(index_count, 1, 0, 0, 0);
+
+
+    // Update uniform buffer
+    float t = static_cast<float>(glfwGetTime()); // glfwGetTime returns a double
+    queue.writeBuffer(uniform_buffer, 0, &t, sizeof(float));
+
 
     render_pass.end();
     render_pass.release();
@@ -428,12 +456,19 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
         supported_limits.limits.minStorageBufferOffsetAlignment;
     // There is a maximum of 3 float forwarded from vertex to fragment shader
     required_limits.limits.maxInterStageShaderComponents = 3;
+    // We use at most 1 bind group for now
+    required_limits.limits.maxBindGroups = 1;
+    // We use at most 1 uniform buffer per stage
+    required_limits.limits.maxUniformBuffersPerShaderStage = 1;
+    // Uniform structs have a size of maximum 16 float (more than what we need)
+    required_limits.limits.maxUniformBufferBindingSize = 16 * 4;
 
     return required_limits;
 }
 
 void Application::initialize_buffers()
 {
+    /*
     // Vertex buffer data
     // There are 2 floats per vertex, one for x and one for y.
     // But in the end this is just a bunch of floats to the eyes of the GPU,
@@ -460,11 +495,17 @@ void Application::initialize_buffers()
         0, 1, 2, // Triangle #0 connects points #0, #1 and #2
         0, 2, 3  // Triangle #1 connects points #0, #2 and #3
     };
+    */
+
+    std::vector<float> point_data;
+    std::vector<uint16_t> index_data;
+
+    bool success = load_geometry(RESOURCE_DIR "/webgpu.txt", point_data, index_data);
+    
+    assert(success && "Could not load geometry!");
 
     // We will declare vertex_count as a member of the Application class
     index_count = static_cast<uint32_t>(index_data.size());
-    assert(static_cast<uint32_t>(point_data.size() / 2) == static_cast<uint32_t>(color_data.size() / 3) &&
-           "Amount of Positions doesn't match Amount of Colors");
 
     // Create buffer descriptor
     BufferDescriptor buffer_desc;
@@ -472,77 +513,65 @@ void Application::initialize_buffers()
     buffer_desc.mappedAtCreation = false;
 
     // Create vertex buffer
-    buffer_desc.label = "Vertex Postition";
+    buffer_desc.label = "Vertex Buffer";
     buffer_desc.size = point_data.size() * sizeof(float);
     point_buffer = device.createBuffer(buffer_desc);
     queue.writeBuffer(point_buffer, 0, point_data.data(), buffer_desc.size);
 
-    buffer_desc.label = "Vertex Color";
-    buffer_desc.size = color_data.size() * sizeof(float);
-    color_buffer = device.createBuffer(buffer_desc);
-    queue.writeBuffer(color_buffer, 0, color_data.data(), buffer_desc.size);
-
     // Create index buffer
+    buffer_desc.label = "Index Buffer";
     buffer_desc.size = index_data.size() * sizeof(uint16_t);
     buffer_desc.size = (buffer_desc.size + 3) & ~3; // round up to the next multiple of 4
     buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Index;
     index_buffer = device.createBuffer(buffer_desc);
     queue.writeBuffer(index_buffer, 0, index_data.data(), buffer_desc.size);
+
+    // Create uniform buffer
+    buffer_desc.label = "Uniform Buffer";
+    buffer_desc.size = sizeof(float);
+    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Uniform;
+    buffer_desc.mappedAtCreation = false;
+    uniform_buffer = device.createBuffer(buffer_desc);
+    float currentTime = 1.0f;
+    queue.writeBuffer(uniform_buffer, 0, &currentTime, sizeof(float));
 }
 
-void Application::initialize_pipeline()
+void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc,
+                                      BindGroupLayout& bind_group_layout)
 {
     std::cout << "Initializing Pipeline" << std::endl;
 
-    // Load the shader module
-    ShaderModuleDescriptor shader_desc;
-#ifdef WEBGPU_BACKEND_WGPU
-    shader_desc.hintCount = 0;
-    shader_desc.hints = nullptr;
-#endif
-
-    // We use the extension mechanism to specify the WGSL part of the shader module descriptor
-    ShaderModuleWGSLDescriptor shader_code_desc;
-    // Set the chained struct's header
-    shader_code_desc.chain.next = nullptr;
-    shader_code_desc.chain.sType = SType::ShaderModuleWGSLDescriptor;
-    // Connect the chain
-    shader_desc.nextInChain = &shader_code_desc.chain;
-    shader_code_desc.code = shader_source;
-    ShaderModule shader_module = device.createShaderModule(shader_desc);
+    std::cout << "Creating shader module..." << std::endl;
+    ShaderModule shader_module = load_shader_module(RESOURCE_DIR "/shader.wgsl", device);
+    std::cout << "Shader module: " << shader_module << std::endl;
     assert(shader_module && "CRITICAL: Shader Module failed to Create");
 
     // Create the render pipeline
     RenderPipelineDescriptor pipeline_desc;
 
+    // We use one vertex buffer
+    VertexBufferLayout vertex_buffer_layout;
     // We now have 2 attributes
-    std::vector<VertexBufferLayout> vertex_buffer_layouts(2);
+    std::vector<VertexAttribute> vertex_attribs(2);
 
-    // Position attribute
-    VertexAttribute position_attrib;
-    position_attrib.shaderLocation = 0;               // @location(0)
-    position_attrib.format = VertexFormat::Float32x2; // size of position
-    position_attrib.offset = 0;
+    // Describe the position attribute
+    vertex_attribs[0].shaderLocation = 0; // @location(0)
+    vertex_attribs[0].format = VertexFormat::Float32x2;
+    vertex_attribs[0].offset = 0;
 
-    vertex_buffer_layouts[0].attributeCount = 1;
-    vertex_buffer_layouts[0].attributes = &position_attrib;
-    vertex_buffer_layouts[0].arrayStride = 2 * sizeof(float); // stride = size of position
-    vertex_buffer_layouts[0].stepMode = VertexStepMode::Vertex;
+    // Describe the color attribute
+    vertex_attribs[1].shaderLocation = 1;               // @location(1)
+    vertex_attribs[1].format = VertexFormat::Float32x3; // different type!
+    vertex_attribs[1].offset = 2 * sizeof(float);       // non null offset!
 
-    // Color attribute
-    VertexAttribute color_attrib;
-    color_attrib.shaderLocation = 1;               // @location(1)
-    color_attrib.format = VertexFormat::Float32x3; // size of color
-    color_attrib.offset = 0;
+    vertex_buffer_layout.attributeCount = static_cast<uint32_t>(vertex_attribs.size());
+    vertex_buffer_layout.attributes = vertex_attribs.data();
 
-    vertex_buffer_layouts[1].attributeCount = 1;
-    vertex_buffer_layouts[1].attributes = &color_attrib;
-    vertex_buffer_layouts[1].arrayStride = 3 * sizeof(float); // stride = size of color
-    vertex_buffer_layouts[1].stepMode = VertexStepMode::Vertex;
+    vertex_buffer_layout.arrayStride = 5 * sizeof(float);
+    vertex_buffer_layout.stepMode = VertexStepMode::Vertex;
 
-
-    pipeline_desc.vertex.bufferCount = static_cast<uint32_t>(vertex_buffer_layouts.size());
-    pipeline_desc.vertex.buffers = vertex_buffer_layouts.data();
+    pipeline_desc.vertex.bufferCount = 1;
+    pipeline_desc.vertex.buffers = &vertex_buffer_layout;
 
     // NB: We define the 'shader_module' in the second part of this chapter.
     // Here we tell that the programmable vertex shader stage is described
@@ -609,6 +638,27 @@ void Application::initialize_pipeline()
     // Default value as well (irrelevant for count = 1 anyways)
     pipeline_desc.multisample.alphaToCoverageEnabled = false;
     pipeline_desc.layout = nullptr;
+
+    // Create binding layout (don't forget to = Default)
+    BindGroupLayoutEntry binding_layout = Default;
+    // The binding index as used in the @binding attribute in the shader
+    binding_layout.binding = 0;
+    // The stage that needs to access this resource
+    binding_layout.visibility = ShaderStage::Vertex;
+    binding_layout.buffer.type = BufferBindingType::Uniform;
+    binding_layout.buffer.minBindingSize = sizeof(float);
+
+    // Create a bind group layout
+    bind_group_layout_desc.entryCount = 1;
+    bind_group_layout_desc.entries = &binding_layout;
+    bind_group_layout = device.createBindGroupLayout(bind_group_layout_desc);
+
+    // Create the pipeline layout
+    PipelineLayoutDescriptor layout_desc;
+    layout_desc.bindGroupLayoutCount = 1;
+    layout_desc.bindGroupLayouts = (WGPUBindGroupLayout*)&bind_group_layout;
+    PipelineLayout layout = device.createPipelineLayout(layout_desc);
+    pipeline_desc.layout = layout;
 
     pipeline = device.createRenderPipeline(pipeline_desc);
     assert(pipeline && "CRITICAL: Pipeline failed to Create");

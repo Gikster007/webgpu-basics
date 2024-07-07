@@ -37,6 +37,25 @@ target_sources(webgpu-basics PRIVATE
 # Pre-compiled header
 target_precompile_headers(webgpu-basics PRIVATE "src/precomp.h")
 
+# We add an option to enable different settings when developing the app than
+# when distributing it.
+option(DEV_MODE "Set up development helper settings" ON)
+
+if(DEV_MODE)
+    # In dev mode, we load resources from the source tree, so that when we
+    # dynamically edit resources (like shaders), these are correctly
+    # versionned.
+    target_compile_definitions(webgpu-basics PRIVATE
+        RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources"
+    )
+else()
+    # In release mode, we just load resources relatively to wherever the
+    # executable is launched from, so that the binary is portable
+    target_compile_definitions(webgpu-basics PRIVATE
+        RESOURCE_DIR="./resources"
+    )
+endif()
+
 # Catch more warnings
 if (MSVC)
     target_compile_options(webgpu-basics PRIVATE /W4)
