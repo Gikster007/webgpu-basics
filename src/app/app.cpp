@@ -19,7 +19,7 @@ void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yiel
 }
 
 bool Application::load_geometry(const fs::path& path, std::vector<float>& point_data,
-                  std::vector<uint16_t>& index_data)
+                                std::vector<uint16_t>& index_data)
 {
     std::ifstream file(path);
     if (!file.is_open())
@@ -115,6 +115,15 @@ ShaderModule Application::load_shader_module(const fs::path& path, Device device
     return device.createShaderModule(shader_desc);
 }
 
+/**
+ * Round 'value' up to the next multiplier of 'step'.
+ */
+uint32_t ceil_to_next_multiple(uint32_t value, uint32_t step)
+{
+    uint32_t divide_and_ceil = value / step + (value % step == 0 ? 0 : 1);
+    return step * divide_and_ceil;
+}
+
 bool Application::initialize()
 {
     // Open window
@@ -130,9 +139,9 @@ bool Application::initialize()
     assert(surface && "CRITICAL: Surface failed to initialise");
 
     std::cout << "Requesting adapter..." << std::endl;
-    RequestAdapterOptions adapterOpts = {};
-    adapterOpts.compatibleSurface = surface;
-    Adapter adapter = instance.requestAdapter(adapterOpts);
+    RequestAdapterOptions adapter_opts = {};
+    adapter_opts.compatibleSurface = surface;
+    Adapter adapter = instance.requestAdapter(adapter_opts);
     assert(adapter && "CRITICAL: Adapter failed to initialise");
 
     std::cout << "Got adapter: " << adapter << std::endl;
@@ -153,14 +162,11 @@ bool Application::initialize()
             std::cout << " (" << message << ")";
         std::cout << std::endl;
     };
-
-    RequiredLimits requiredLimits = get_required_limits(adapter);
-    device_desc.requiredLimits = &requiredLimits;
-
+    RequiredLimits required_limits = get_required_limits(adapter);
+    device_desc.requiredLimits = &required_limits;
     device = adapter.requestDevice(device_desc);
     assert(device && "CRITICAL: Device failed to initialise");
     std::cout << "Got device: " << device << std::endl;
-
     uncaptured_error_callback_handle =
         device.setUncapturedErrorCallback([](ErrorType type, char const* message) {
             std::cout << "Uncaptured device error: type " << type;
@@ -174,14 +180,12 @@ bool Application::initialize()
 
     // Configure the surface
     SurfaceConfiguration config = {};
-
     // Configuration of the textures created for the underlying swap chain
     config.width = WIN_WIDTH;
     config.height = WIN_HEIGHT;
     config.usage = TextureUsage::RenderAttachment;
     surface_format = surface.getPreferredFormat(adapter);
     config.format = surface_format;
-
     // And we do not need any particular view format:
     config.viewFormatCount = 0;
     config.viewFormats = nullptr;
@@ -201,6 +205,11 @@ bool Application::initialize()
     device.getLimits(&supported_limits);
     std::cout << "device.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
               << std::endl;
+    Limits device_limits = supported_limits.limits;
+
+    // Subtlety
+    uniform_stride = ceil_to_next_multiple(
+        (uint32_t)sizeof(MyUniforms), (uint32_t)device_limits.minUniformBufferOffsetAlignment);
 
     // Layout for Uniform Buffer binding
     BindGroupLayoutDescriptor bind_group_layout_desc;
@@ -281,7 +290,7 @@ bool Application::initialize()
 
     initialize_buffers();
 
-     // Create a binding
+    // Create a binding
     BindGroupEntry binding;
     // The index of the binding (the entries in bind_group_desc can be in any order)
     binding.binding = 0;
@@ -291,7 +300,7 @@ bool Application::initialize()
     // multiple uniform blocks.
     binding.offset = 0;
     // And we specify again the size of the buffer.
-    binding.size = sizeof(float);
+    binding.size = sizeof(MyUniforms);
 
     // A bind group contains one or multiple bindings
     BindGroupDescriptor bind_group_desc;
@@ -364,17 +373,27 @@ void Application::tick()
     // we've done when creating the index buffer.
     render_pass.setIndexBuffer(index_buffer, IndexFormat::Uint16, 0, index_buffer.getSize());
 
-    // Set binding group
-    render_pass.setBindGroup(0, bind_group, 0, nullptr);
+    uint32_t dynamicOffset = 0;
 
-    // We use the `vertexCount` variable instead of hard-coding the vertex count
+    // Set binding group
+    dynamicOffset = 0 * uniform_stride;
+    render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
     render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
+    // Set binding group with a different uniform offset
+    dynamicOffset = 1 * uniform_stride;
+    render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
+    render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
-    // Update uniform buffer
-    float t = static_cast<float>(glfwGetTime()); // glfwGetTime returns a double
-    queue.writeBuffer(uniform_buffer, 0, &t, sizeof(float));
+    // Upload first value
+    uniforms.time = static_cast<float>(glfwGetTime());
+    uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
+    queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
+    // Upload second value
+    uniforms.time += 0.3f;
+    uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
+    queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
 
     render_pass.end();
     render_pass.release();
@@ -462,6 +481,8 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     required_limits.limits.maxUniformBuffersPerShaderStage = 1;
     // Uniform structs have a size of maximum 16 float (more than what we need)
     required_limits.limits.maxUniformBufferBindingSize = 16 * 4;
+    // Extra limit requirement
+    required_limits.limits.maxDynamicUniformBuffersPerPipelineLayout = 1;
 
     return required_limits;
 }
@@ -483,8 +504,8 @@ void Application::initialize_buffers()
 
     // r0,  g0,  b0, r1,  g1,  b1, ...
     std::vector<float> color_data = {
-        1.0, 0.0, 0.0, 
-        0.0, 1.0, 0.0, 
+        1.0, 0.0, 0.0,
+        0.0, 1.0, 0.0,
         0.0, 0.0, 1.0,
         1.0, 1.0, 0.0,
     };
@@ -501,7 +522,7 @@ void Application::initialize_buffers()
     std::vector<uint16_t> index_data;
 
     bool success = load_geometry(RESOURCE_DIR "/webgpu.txt", point_data, index_data);
-    
+
     assert(success && "Could not load geometry!");
 
     // We will declare vertex_count as a member of the Application class
@@ -528,12 +549,14 @@ void Application::initialize_buffers()
 
     // Create uniform buffer
     buffer_desc.label = "Uniform Buffer";
-    buffer_desc.size = sizeof(float);
+    buffer_desc.size = uniform_stride + sizeof(MyUniforms);
     buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Uniform;
     buffer_desc.mappedAtCreation = false;
     uniform_buffer = device.createBuffer(buffer_desc);
-    float currentTime = 1.0f;
-    queue.writeBuffer(uniform_buffer, 0, &currentTime, sizeof(float));
+    // Upload the initial value of the uniforms
+    uniforms.time = 1.0f;
+    uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
+    queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 }
 
 void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc,
@@ -644,9 +667,10 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     // The binding index as used in the @binding attribute in the shader
     binding_layout.binding = 0;
     // The stage that needs to access this resource
-    binding_layout.visibility = ShaderStage::Vertex;
+    binding_layout.visibility = ShaderStage::Vertex | ShaderStage::Fragment;
     binding_layout.buffer.type = BufferBindingType::Uniform;
-    binding_layout.buffer.minBindingSize = sizeof(float);
+    binding_layout.buffer.minBindingSize = sizeof(MyUniforms);
+    binding_layout.buffer.hasDynamicOffset = true;
 
     // Create a bind group layout
     bind_group_layout_desc.entryCount = 1;

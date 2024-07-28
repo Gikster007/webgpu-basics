@@ -10,9 +10,22 @@
 #endif // __EMSCRIPTEN__
 
 #include <filesystem>
+#include <array>
 
 using namespace wgpu;
 namespace fs = std::filesystem;
+
+/**
+ * The same structure as in the shader, replicated in C++
+ */
+struct MyUniforms
+{
+    std::array<float, 4> color;
+    float time;
+    float _pad[3];
+};
+// Have the compiler check byte alignment
+static_assert(sizeof(MyUniforms) % 16 == 0);
 
 class Application
 {
@@ -60,4 +73,6 @@ class Application
     Buffer index_buffer;
     Buffer uniform_buffer;
     uint32_t index_count;
+    MyUniforms uniforms;
+    uint32_t uniform_stride;
 };
