@@ -18,8 +18,16 @@ void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yiel
 #endif
 }
 
-bool Application::load_geometry(const fs::path& path, std::vector<float>& point_data,
-                                std::vector<uint16_t>& index_data)
+/**
+ * Round 'value' up to the next multiplier of 'step'.
+ */
+uint32_t ceil_to_next_multiple(uint32_t value, uint32_t step)
+{
+    uint32_t divide_and_ceil = value / step + (value % step == 0 ? 0 : 1);
+    return step * divide_and_ceil;
+}
+
+bool Application::load_geometry(const fs::path& path, std::vector<float>& point_data, std::vector<uint16_t>& index_data, int dimensions)
 {
     std::ifstream file(path);
     if (!file.is_open())
@@ -44,13 +52,6 @@ bool Application::load_geometry(const fs::path& path, std::vector<float>& point_
     while (!file.eof())
     {
         getline(file, line);
-
-        // overcome the `CRLF` problem
-        if (!line.empty() && line.back() == '\r')
-        {
-            line.pop_back();
-        }
-
         if (line == "[points]")
         {
             current_section = Section::Points;
@@ -66,8 +67,8 @@ bool Application::load_geometry(const fs::path& path, std::vector<float>& point_
         else if (current_section == Section::Points)
         {
             std::istringstream iss(line);
-            // Get x, y, r, g, b
-            for (int i = 0; i < 5; ++i)
+            // Get x, y, (z,) r, g, b
+            for (int i = 0; i < dimensions + 3; ++i)
             {
                 iss >> value;
                 point_data.push_back(value);
@@ -115,15 +116,6 @@ ShaderModule Application::load_shader_module(const fs::path& path, Device device
     return device.createShaderModule(shader_desc);
 }
 
-/**
- * Round 'value' up to the next multiplier of 'step'.
- */
-uint32_t ceil_to_next_multiple(uint32_t value, uint32_t step)
-{
-    uint32_t divide_and_ceil = value / step + (value % step == 0 ? 0 : 1);
-    return step * divide_and_ceil;
-}
-
 bool Application::initialize()
 {
     // Open window
@@ -155,8 +147,7 @@ bool Application::initialize()
     device_desc.requiredLimits = nullptr;
     device_desc.defaultQueue.nextInChain = nullptr;
     device_desc.defaultQueue.label = "The default queue";
-    device_desc.deviceLostCallback = [](WGPUDeviceLostReason reason, char const* message,
-                                        void* /* pUserData */) {
+    device_desc.deviceLostCallback = [](WGPUDeviceLostReason reason, char const* message, void* /* pUserData */) {
         std::cout << "Device lost: reason " << reason;
         if (message)
             std::cout << " (" << message << ")";
@@ -167,13 +158,12 @@ bool Application::initialize()
     device = adapter.requestDevice(device_desc);
     assert(device && "CRITICAL: Device failed to initialise");
     std::cout << "Got device: " << device << std::endl;
-    uncaptured_error_callback_handle =
-        device.setUncapturedErrorCallback([](ErrorType type, char const* message) {
-            std::cout << "Uncaptured device error: type " << type;
-            if (message)
-                std::cout << " (" << message << ")";
-            std::cout << std::endl;
-        });
+    uncaptured_error_callback_handle = device.setUncapturedErrorCallback([](ErrorType type, char const* message) {
+        std::cout << "Uncaptured device error: type " << type;
+        if (message)
+            std::cout << " (" << message << ")";
+        std::cout << std::endl;
+    });
 
     queue = device.getQueue();
     assert(queue && "CRITICAL: Queue failed to initialise");
@@ -199,17 +189,14 @@ bool Application::initialize()
     SupportedLimits supported_limits;
 
     adapter.getLimits(&supported_limits);
-    std::cout << "adapter.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
-              << std::endl;
+    std::cout << "adapter.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes << std::endl;
 
     device.getLimits(&supported_limits);
-    std::cout << "device.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes
-              << std::endl;
+    std::cout << "device.maxVertexAttributes: " << supported_limits.limits.maxVertexAttributes << std::endl;
     Limits device_limits = supported_limits.limits;
 
     // Subtlety
-    uniform_stride = ceil_to_next_multiple(
-        (uint32_t)sizeof(MyUniforms), (uint32_t)device_limits.minUniformBufferOffsetAlignment);
+    uniform_stride = ceil_to_next_multiple((uint32_t)sizeof(MyUniforms), (uint32_t)device_limits.minUniformBufferOffsetAlignment);
 
     // Layout for Uniform Buffer binding
     BindGroupLayoutDescriptor bind_group_layout_desc;
@@ -380,20 +367,20 @@ void Application::tick()
     render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
     render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
-    // Set binding group with a different uniform offset
-    dynamicOffset = 1 * uniform_stride;
-    render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
-    render_pass.drawIndexed(index_count, 1, 0, 0, 0);
+    //// Set binding group with a different uniform offset
+    //dynamicOffset = 1 * uniform_stride;
+    //render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
+    //render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
     // Upload first value
-    uniforms.time = static_cast<float>(glfwGetTime());
+    uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
-    // Upload second value
-    uniforms.time += 0.3f;
-    uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
-    queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
+    //// Upload second value
+    //uniforms.time += 0.3f;
+    //uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
+    //queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
 
     render_pass.end();
     render_pass.release();
@@ -469,10 +456,9 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // Maximum size of a buffer is 6 vertices of 2 float each
     required_limits.limits.maxBufferSize = 15 * 5 * sizeof(float);
     // Maximum stride between 2 consecutive vertices in the vertex buffer
-    required_limits.limits.maxVertexBufferArrayStride = 3 * sizeof(float);
+    required_limits.limits.maxVertexBufferArrayStride = 6 * sizeof(float);
     // This must be set even if we do not use storage buffers for now
-    required_limits.limits.minStorageBufferOffsetAlignment =
-        supported_limits.limits.minStorageBufferOffsetAlignment;
+    required_limits.limits.minStorageBufferOffsetAlignment = supported_limits.limits.minStorageBufferOffsetAlignment;
     // There is a maximum of 3 float forwarded from vertex to fragment shader
     required_limits.limits.maxInterStageShaderComponents = 3;
     // We use at most 1 bind group for now
@@ -489,39 +475,11 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
 
 void Application::initialize_buffers()
 {
-    /*
-    // Vertex buffer data
-    // There are 2 floats per vertex, one for x and one for y.
-    // But in the end this is just a bunch of floats to the eyes of the GPU,
-    // the *layout* will tell how to interpret this.
-    // (0.0f, 0.0f) is the center of the screen
-    std::vector<float> point_data = {
-        -0.5f, -0.5f,
-        +0.5f, -0.5f,
-        +0.5f, +0.5f,
-        -0.5f, +0.5f
-    };
-
-    // r0,  g0,  b0, r1,  g1,  b1, ...
-    std::vector<float> color_data = {
-        1.0, 0.0, 0.0,
-        0.0, 1.0, 0.0,
-        0.0, 0.0, 1.0,
-        1.0, 1.0, 0.0,
-    };
-
-    // Define index data
-    // This is a list of indices referencing positions in the point_data
-    std::vector<uint16_t> index_data = {
-        0, 1, 2, // Triangle #0 connects points #0, #1 and #2
-        0, 2, 3  // Triangle #1 connects points #0, #2 and #3
-    };
-    */
 
     std::vector<float> point_data;
     std::vector<uint16_t> index_data;
 
-    bool success = load_geometry(RESOURCE_DIR "/webgpu.txt", point_data, index_data);
+    bool success = load_geometry(RESOURCE_DIR "/pyramid.txt", point_data, index_data, 3 /* dimensions */);
 
     assert(success && "Could not load geometry!");
 
@@ -559,8 +517,7 @@ void Application::initialize_buffers()
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 }
 
-void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc,
-                                      BindGroupLayout& bind_group_layout)
+void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc, BindGroupLayout& bind_group_layout)
 {
     std::cout << "Initializing Pipeline" << std::endl;
 
@@ -579,18 +536,18 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
 
     // Describe the position attribute
     vertex_attribs[0].shaderLocation = 0; // @location(0)
-    vertex_attribs[0].format = VertexFormat::Float32x2;
+    vertex_attribs[0].format = VertexFormat::Float32x3;
     vertex_attribs[0].offset = 0;
 
     // Describe the color attribute
     vertex_attribs[1].shaderLocation = 1;               // @location(1)
     vertex_attribs[1].format = VertexFormat::Float32x3; // different type!
-    vertex_attribs[1].offset = 2 * sizeof(float);       // non null offset!
+    vertex_attribs[1].offset = 3 * sizeof(float);       // non null offset!
 
     vertex_buffer_layout.attributeCount = static_cast<uint32_t>(vertex_attribs.size());
     vertex_buffer_layout.attributes = vertex_attribs.data();
 
-    vertex_buffer_layout.arrayStride = 5 * sizeof(float);
+    vertex_buffer_layout.arrayStride = 6 * sizeof(float);
     vertex_buffer_layout.stepMode = VertexStepMode::Vertex;
 
     pipeline_desc.vertex.bufferCount = 1;
@@ -640,8 +597,7 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     ColorTargetState color_target;
     color_target.format = surface_format;
     color_target.blend = &blend_state;
-    color_target.writeMask =
-        ColorWriteMask::All; // We could write to only some of the color channels.
+    color_target.writeMask = ColorWriteMask::All; // We could write to only some of the color channels.
 
     // We have only one target because our render pass has only one output color
     // attachment.
@@ -649,8 +605,11 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     fragment_state.targets = &color_target;
     pipeline_desc.fragment = &fragment_state;
 
-    // We do not use stencil/depth testing for now
-    pipeline_desc.depthStencil = nullptr;
+    DepthStencilState depth_stencil_state = Default;
+    depth_stencil_state.depthCompare = CompareFunction::Less;
+    depth_stencil_state.depthWriteEnabled = true;
+    // Setup depth state
+    pipeline_desc.depthStencil = &depth_stencil_state;
 
     // Samples per pixel
     pipeline_desc.multisample.count = 1;

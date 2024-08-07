@@ -52,8 +52,8 @@ class Application
     void initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layout_desc,
                              BindGroupLayout& bind_group_layout);
    
-    bool load_geometry(const fs::path& path, std::vector<float>& pointData,
-                       std::vector<uint16_t>& indexData);
+    bool load_geometry(const fs::path& path, std::vector<float>& point_data,
+                       std::vector<uint16_t>& index_data, int dimensions);
 
     ShaderModule load_shader_module(const fs::path& path, Device device);
 

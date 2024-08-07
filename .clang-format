@@ -5,7 +5,7 @@ BasedOnStyle: Microsoft
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
-ColumnLimit: 100
+ColumnLimit: 150
 
 # DO NOT Sort includes!
 SortIncludes: false
