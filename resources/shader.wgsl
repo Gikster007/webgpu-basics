@@ -40,7 +40,7 @@ fn vs_main(in: VertexInput) -> VertexOutput
         alpha * in.position.z - beta * in.position.y,
     );
 
-    out.position = vec4f(position.x , position.y * ratio, 0.0, 1.0);
+    out.position = vec4f(position.x , position.y * ratio, position.z * 0.5 + 0.5, 1.0);
     out.color = in.color; // Send input color over to frag shader
     return out;
 }

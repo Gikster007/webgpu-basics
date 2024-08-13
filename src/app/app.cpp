@@ -307,6 +307,9 @@ void Application::terminate()
 {
     index_buffer.release();
     point_buffer.release();
+    depth_texture_view.release();
+    depth_texture.destroy();
+    depth_texture.release();
     pipeline.release();
     surface.unconfigure();
     queue.release();
@@ -346,7 +349,28 @@ void Application::tick()
 
     render_pass_desc.colorAttachmentCount = 1;
     render_pass_desc.colorAttachments = &render_pass_color_attachment;
-    render_pass_desc.depthStencilAttachment = nullptr;
+    // We now add a depth/stencil attachment:
+    RenderPassDepthStencilAttachment depth_stencil_attachment;
+    // The view of the depth texture
+    depth_stencil_attachment.view = depth_texture_view;
+    // The initial value of the depth buffer, meaning "far"
+    depth_stencil_attachment.depthClearValue = 1.0f;
+    // Operation settings comparable to the color attachment
+    depth_stencil_attachment.depthLoadOp = LoadOp::Clear;
+    depth_stencil_attachment.depthStoreOp = StoreOp::Store;
+    // we could turn off writing to the depth buffer globally here
+    depth_stencil_attachment.depthReadOnly = false;
+    // Stencil setup, mandatory but unused
+    depth_stencil_attachment.stencilClearValue = 0;
+#ifdef WEBGPU_BACKEND_WGPU
+    depth_stencil_attachment.stencilLoadOp = LoadOp::Clear;
+    depth_stencil_attachment.stencilStoreOp = StoreOp::Store;
+#else
+    depth_stencil_attachment.stencilLoadOp = LoadOp::Undefined;
+    depth_stencil_attachment.stencilStoreOp = StoreOp::Undefined;
+#endif
+    depth_stencil_attachment.stencilReadOnly = true;
+    render_pass_desc.depthStencilAttachment = &depth_stencil_attachment;
     render_pass_desc.timestampWrites = nullptr;
 
     RenderPassEncoder render_pass = encoder.beginRenderPass(render_pass_desc);
@@ -469,6 +493,10 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     required_limits.limits.maxUniformBufferBindingSize = 16 * 4;
     // Extra limit requirement
     required_limits.limits.maxDynamicUniformBuffersPerPipelineLayout = 1;
+    // For the depth buffer, we enable textures (up to the size of the window):
+    required_limits.limits.maxTextureDimension1D = WIN_HEIGHT;
+    required_limits.limits.maxTextureDimension2D = WIN_WIDTH;
+    required_limits.limits.maxTextureArrayLayers = 1;
 
     return required_limits;
 }
@@ -605,10 +633,19 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     fragment_state.targets = &color_target;
     pipeline_desc.fragment = &fragment_state;
 
+    // We setup a depth buffer state for the render pipeline
     DepthStencilState depth_stencil_state = Default;
+    // Keep a fragment only if its depth is lower than the previously blended one
     depth_stencil_state.depthCompare = CompareFunction::Less;
+    // Each time a fragment is blended into the target, we update the value of the Z-buffer
     depth_stencil_state.depthWriteEnabled = true;
-    // Setup depth state
+    // Store the format in a variable as later parts of the code depend on it
+    TextureFormat depth_texture_format = TextureFormat::Depth24Plus;
+    depth_stencil_state.format = depth_texture_format;
+    // Deactivate the stencil alltogether
+    depth_stencil_state.stencilReadMask = 0;
+    depth_stencil_state.stencilWriteMask = 0;
+
     pipeline_desc.depthStencil = &depth_stencil_state;
 
     // Samples per pixel
@@ -648,6 +685,31 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
 
     // We no longer need to access the shader module
     shader_module.release();
+
+    // Create the depth texture
+    TextureDescriptor depth_texture_desc;
+    depth_texture_desc.dimension = TextureDimension::_2D;
+    depth_texture_desc.format = depth_texture_format;
+    depth_texture_desc.mipLevelCount = 1;
+    depth_texture_desc.sampleCount = 1;
+    depth_texture_desc.size = {WIN_WIDTH, WIN_HEIGHT, 1};
+    depth_texture_desc.usage = TextureUsage::RenderAttachment;
+    depth_texture_desc.viewFormatCount = 1;
+    depth_texture_desc.viewFormats = (WGPUTextureFormat*)&depth_texture_format;
+    depth_texture = device.createTexture(depth_texture_desc);
+    std::cout << "Depth texture: " << depth_texture << std::endl;
+
+    // Create the view of the depth texture manipulated by the rasterizer
+    TextureViewDescriptor depth_texture_view_desc;
+    depth_texture_view_desc.aspect = TextureAspect::DepthOnly;
+    depth_texture_view_desc.baseArrayLayer = 0;
+    depth_texture_view_desc.arrayLayerCount = 1;
+    depth_texture_view_desc.baseMipLevel = 0;
+    depth_texture_view_desc.mipLevelCount = 1;
+    depth_texture_view_desc.dimension = TextureViewDimension::_2D;
+    depth_texture_view_desc.format = depth_texture_format;
+    depth_texture_view = depth_texture.createView(depth_texture_view_desc);
+    std::cout << "Depth texture view: " << depth_texture_view << std::endl;
 
     std::cout << "Pipeline Initialized!" << std::endl;
 }
