@@ -1,5 +1,8 @@
 #include "app.h"
 
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "../tiny_obj_loader.h"
+
 #include <fstream>
 #include <sstream>
 
@@ -85,6 +88,59 @@ bool Application::load_geometry(const fs::path& path, std::vector<float>& point_
             }
         }
     }
+    return true;
+}
+
+bool Application::load_geometry_from_obj(const fs::path& path, std::vector<VertexAttributes>& vertex_data)
+{
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+
+    std::string warn;
+    std::string err;
+
+    bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.string().c_str());
+
+    if (!warn.empty())
+    {
+        std::cout << warn << std::endl;
+    }
+
+    if (!err.empty())
+    {
+        std::cerr << err << std::endl;
+    }
+
+    if (!ret)
+    {
+        return false;
+    }
+
+    // Filling in vertexData:
+    vertex_data.clear();
+    for (const auto& shape : shapes)
+    {
+        size_t offset = vertex_data.size();
+        vertex_data.resize(offset + shape.mesh.indices.size());
+
+        for (size_t i = 0; i < shape.mesh.indices.size(); ++i)
+        {
+            const tinyobj::index_t& idx = shape.mesh.indices[i];
+
+            vertex_data[offset + i].position = {attrib.vertices[3 * idx.vertex_index + 0],
+                                                -attrib.vertices[3 * idx.vertex_index + 2], // Add a minus to avoid mirroring
+                                                attrib.vertices[3 * idx.vertex_index + 1]};
+
+            // Also apply the transform to normals!!
+            vertex_data[offset + i].normal = {attrib.normals[3 * idx.normal_index + 0], -attrib.normals[3 * idx.normal_index + 2],
+                                              attrib.normals[3 * idx.normal_index + 1]};
+
+            vertex_data[offset + i].color = {attrib.colors[3 * idx.vertex_index + 0], attrib.colors[3 * idx.vertex_index + 1],
+                                             attrib.colors[3 * idx.vertex_index + 2]};
+        }
+    }
+
     return true;
 }
 
@@ -326,8 +382,7 @@ bool Application::initialize()
 
 void Application::terminate()
 {
-    index_buffer.release();
-    point_buffer.release();
+    vertex_buffer.release();
     depth_texture_view.release();
     depth_texture.destroy();
     depth_texture.release();
@@ -400,38 +455,35 @@ void Application::tick()
     render_pass.setPipeline(pipeline);
 
     // Set vertex buffer while encoding the render pass
-    render_pass.setVertexBuffer(0, point_buffer, 0, point_buffer.getSize());
-    // The second argument must correspond to the choice of uint16_t or uint32_t
-    // we've done when creating the index buffer.
-    render_pass.setIndexBuffer(index_buffer, IndexFormat::Uint16, 0, index_buffer.getSize());
-
+    render_pass.setVertexBuffer(0, vertex_buffer, 0, vertex_buffer.getSize());
     uint32_t dynamicOffset = 0;
 
     // Set binding group
     dynamicOffset = 0 * uniform_stride;
     render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
-    render_pass.drawIndexed(index_count, 1, 0, 0, 0);
+
+    render_pass.draw(index_count, 1, 0, 0);
 
     //// Set binding group with a different uniform offset
-    //dynamicOffset = 1 * uniform_stride;
-    //render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
-    //render_pass.drawIndexed(index_count, 1, 0, 0, 0);
+    // dynamicOffset = 1 * uniform_stride;
+    // render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
+    // render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
     // Upload first values
     uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
     glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
-    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.5, 0.0, 0.0));
+    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
     float angle1 = uniforms.time;
     glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
     uniforms.model = rot1 * trans1 * scale;
-    
+
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
     //// Upload second value
-    //uniforms.time += 0.3f;
-    //uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
-    //queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
+    // uniforms.time += 0.3f;
+    // uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
+    // queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
 
     render_pass.end();
     render_pass.release();
@@ -500,23 +552,23 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // Don't forget to = Default
     RequiredLimits required_limits = Default;
 
-    // We use at most 1 vertex attribute for now
-    required_limits.limits.maxVertexAttributes = 2;
-    // We should also tell that we use 1 vertex buffers
+    // We use at most 3 vertex attribute
+    required_limits.limits.maxVertexAttributes = 3;
+    // We should also tell that we use 2 vertex buffers
     required_limits.limits.maxVertexBuffers = 2;
-    // Maximum size of a buffer is 6 vertices of 2 float each
-    required_limits.limits.maxBufferSize = 15 * 5 * sizeof(float);
+    // Maximum size of a buffer
+    required_limits.limits.maxBufferSize = 10000 * sizeof(VertexAttributes);
     // Maximum stride between 2 consecutive vertices in the vertex buffer
-    required_limits.limits.maxVertexBufferArrayStride = 6 * sizeof(float);
+    required_limits.limits.maxVertexBufferArrayStride = sizeof(VertexAttributes);
     // This must be set even if we do not use storage buffers for now
     required_limits.limits.minStorageBufferOffsetAlignment = supported_limits.limits.minStorageBufferOffsetAlignment;
-    // There is a maximum of 3 float forwarded from vertex to fragment shader
-    required_limits.limits.maxInterStageShaderComponents = 3;
+    // There is a maximum of 6 float forwarded from vertex to fragment shader
+    required_limits.limits.maxInterStageShaderComponents = 6;
     // We use at most 1 bind group for now
     required_limits.limits.maxBindGroups = 1;
     // We use at most 1 uniform buffer per stage
     required_limits.limits.maxUniformBuffersPerShaderStage = 1;
-    // Uniform structs have a size of maximum 16 float (more than what we need)
+    // Uniform structs size
     required_limits.limits.maxUniformBufferBindingSize = 16 * 4 * sizeof(float);
     // Extra limit requirement
     required_limits.limits.maxDynamicUniformBuffersPerPipelineLayout = 1;
@@ -530,16 +582,14 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
 
 void Application::initialize_buffers()
 {
-
-    std::vector<float> point_data;
-    std::vector<uint16_t> index_data;
-
-    bool success = load_geometry(RESOURCE_DIR "/pyramid.txt", point_data, index_data, 3 /* dimensions */);
-
+    std::vector<VertexAttributes> vertex_data;
+    bool success = load_geometry_from_obj(RESOURCE_DIR "/mammoth.obj", vertex_data);
+    if (!success)
+    {
+        std::cerr << "Could not load geometry!" << std::endl;
+        return;
+    }
     assert(success && "Could not load geometry!");
-
-    // We will declare vertex_count as a member of the Application class
-    index_count = static_cast<uint32_t>(index_data.size());
 
     // Create buffer descriptor
     BufferDescriptor buffer_desc;
@@ -548,17 +598,11 @@ void Application::initialize_buffers()
 
     // Create vertex buffer
     buffer_desc.label = "Vertex Buffer";
-    buffer_desc.size = point_data.size() * sizeof(float);
-    point_buffer = device.createBuffer(buffer_desc);
-    queue.writeBuffer(point_buffer, 0, point_data.data(), buffer_desc.size);
+    buffer_desc.size = vertex_data.size() * sizeof(VertexAttributes);
+    vertex_buffer = device.createBuffer(buffer_desc);
+    queue.writeBuffer(vertex_buffer, 0, vertex_data.data(), buffer_desc.size);
 
-    // Create index buffer
-    buffer_desc.label = "Index Buffer";
-    buffer_desc.size = index_data.size() * sizeof(uint16_t);
-    buffer_desc.size = (buffer_desc.size + 3) & ~3; // round up to the next multiple of 4
-    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::Index;
-    index_buffer = device.createBuffer(buffer_desc);
-    queue.writeBuffer(index_buffer, 0, index_data.data(), buffer_desc.size);
+    index_count = static_cast<int>(vertex_data.size());
 
     // Create uniform buffer
     buffer_desc.label = "Uniform Buffer";
@@ -587,22 +631,27 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     // We use one vertex buffer
     VertexBufferLayout vertex_buffer_layout;
     // We now have 2 attributes
-    std::vector<VertexAttribute> vertex_attribs(2);
+    std::vector<VertexAttribute> vertex_attribs(3);
 
     // Describe the position attribute
     vertex_attribs[0].shaderLocation = 0; // @location(0)
     vertex_attribs[0].format = VertexFormat::Float32x3;
-    vertex_attribs[0].offset = 0;
+    vertex_attribs[0].offset = offsetof(VertexAttributes, position);
+
+    // Describe the normal attribute
+    vertex_attribs[1].shaderLocation = 1;
+    vertex_attribs[1].format = VertexFormat::Float32x3;
+    vertex_attribs[1].offset = offsetof(VertexAttributes, normal);
 
     // Describe the color attribute
-    vertex_attribs[1].shaderLocation = 1;               // @location(1)
-    vertex_attribs[1].format = VertexFormat::Float32x3; // different type!
-    vertex_attribs[1].offset = 3 * sizeof(float);       // non null offset!
+    vertex_attribs[2].shaderLocation = 2;
+    vertex_attribs[2].format = VertexFormat::Float32x3;
+    vertex_attribs[2].offset = offsetof(VertexAttributes, color);
 
     vertex_buffer_layout.attributeCount = static_cast<uint32_t>(vertex_attribs.size());
     vertex_buffer_layout.attributes = vertex_attribs.data();
 
-    vertex_buffer_layout.arrayStride = 6 * sizeof(float);
+    vertex_buffer_layout.arrayStride = sizeof(VertexAttributes);
     vertex_buffer_layout.stepMode = VertexStepMode::Vertex;
 
     pipeline_desc.vertex.bufferCount = 1;

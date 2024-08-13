@@ -30,6 +30,17 @@ struct MyUniforms
 // Have the compiler check byte alignment
 static_assert(sizeof(MyUniforms) % 16 == 0);
 
+/**
+ * A structure that describes the data layout in the vertex buffer
+ * We do not instantiate it but use it in `sizeof` and `offsetof`
+ */
+struct VertexAttributes
+{
+    glm::vec3 position;
+    glm::vec3 normal;
+    glm::vec3 color;
+};
+
 class Application
 {
   public:
@@ -58,6 +69,8 @@ class Application
     bool load_geometry(const fs::path& path, std::vector<float>& point_data,
                        std::vector<uint16_t>& index_data, int dimensions);
 
+    bool load_geometry_from_obj(const fs::path& path, std::vector<VertexAttributes>& vertex_data);
+
     ShaderModule load_shader_module(const fs::path& path, Device device);
 
   private:
@@ -74,8 +87,7 @@ class Application
     TextureView depth_texture_view;
 
     // Application attributes
-    Buffer point_buffer;
-    Buffer index_buffer;
+    Buffer vertex_buffer;
     Buffer uniform_buffer;
     uint32_t index_count;
     MyUniforms uniforms;
