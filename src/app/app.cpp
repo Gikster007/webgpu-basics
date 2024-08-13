@@ -263,74 +263,6 @@ bool Application::initialize()
     // Release the adapter only after it has been fully utilized
     adapter.release();
 
-    BufferDescriptor buffer_desc;
-    buffer_desc.label = "Some GPU-side data buffer";
-    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::CopySrc;
-    buffer_desc.size = 16;
-    buffer_desc.mappedAtCreation = false;
-    Buffer buffer1 = device.createBuffer(buffer_desc);
-
-    buffer_desc.label = "Output buffer";
-    buffer_desc.usage = BufferUsage::CopyDst | BufferUsage::MapRead;
-    Buffer buffer2 = device.createBuffer(buffer_desc);
-
-    // Create some CPU-side data buffer (of size 16 bytes)
-    std::vector<uint8_t> numbers(16);
-    for (uint8_t i = 0; i < 16; ++i)
-        numbers[i] = i; // `numbers` now contains [ 0, 1, 2, ... ]
-
-    // Copy this from `numbers` (RAM) to `buffer1` (VRAM)
-    queue.writeBuffer(buffer1, 0, numbers.data(), numbers.size());
-
-    CommandEncoder encoder = device.createCommandEncoder(Default);
-
-    encoder.copyBufferToBuffer(buffer1, 0, buffer2, 0, 16);
-
-    CommandBuffer command = encoder.finish(Default);
-    encoder.release();
-    queue.submit(1, &command);
-    command.release();
-
-    // The context shared between this main function and the callback.
-    struct Context
-    {
-        bool ready;
-        Buffer buffer;
-    };
-
-    auto on_buffer2_mapped = [](WGPUBufferMapAsyncStatus status, void* p_user_data) {
-        Context* context = reinterpret_cast<Context*>(p_user_data);
-        context->ready = true;
-        std::cout << "Buffer 2 mapped with status " << status << std::endl;
-        if (status != BufferMapAsyncStatus::Success)
-            return;
-
-        // Get a pointer to wherever the driver mapped the GPU memory to the RAM
-        uint8_t* bufferData = (uint8_t*)context->buffer.getConstMappedRange(0, 16);
-
-        std::cout << "bufferData = [";
-        for (int i = 0; i < 16; ++i)
-        {
-            if (i > 0)
-                std::cout << ", ";
-            std::cout << (int)bufferData[i];
-        }
-        std::cout << "]" << std::endl;
-
-        // Then do not forget to unmap the memory
-        context->buffer.unmap();
-    };
-
-    // Create the Context instance
-    Context context = {false, buffer2};
-
-    wgpuBufferMapAsync(buffer2, MapMode::Read, 0, 16, on_buffer2_mapped, (void*)&context);
-
-    while (!context.ready)
-    {
-        wgpu_poll_events(device, true /* yieldToBrowser */);
-    }
-
     // Camera Setup
     glm::vec3 focal_point(0.0, 0.0, -2.0);
     float focal_length = 1.0;
@@ -352,30 +284,31 @@ bool Application::initialize()
     float fov = 2 * glm::atan(1 / focal_length);
     uniforms.proj = glm::perspective(fov, ratio, near, far);
 
+    // QUAD TEXTURE TESTING
+    uniforms.model = glm::mat4(1.0);
+    uniforms.view = glm::scale(glm::mat4(1.0), glm::vec3(1.0f));
+    uniforms.proj = glm::ortho(-1, 1, -1, 1, -1, 1);
+
     initialize_buffers();
 
     // Create a binding
-    BindGroupEntry binding;
-    // The index of the binding (the entries in bind_group_desc can be in any order)
-    binding.binding = 0;
-    // The buffer it is actually bound to
-    binding.buffer = uniform_buffer;
-    // We can specify an offset within the buffer, so that a single buffer can hold
-    // multiple uniform blocks.
-    binding.offset = 0;
-    // And we specify again the size of the buffer.
-    binding.size = sizeof(MyUniforms);
+    std::vector<BindGroupEntry> bindings(2);
+    // Uniform Buffer Binding
+    bindings[0].binding = 0;
+    bindings[0].buffer = uniform_buffer;
+    bindings[0].offset = 0;
+    bindings[0].size = sizeof(MyUniforms);
+    // Quad Texture Binding
+    bindings[1].binding = 1;
+    bindings[1].textureView = quad_texture_view;
 
     // A bind group contains one or multiple bindings
     BindGroupDescriptor bind_group_desc;
     bind_group_desc.layout = bind_group_layout;
     // There must be as many bindings as declared in the layout!
-    bind_group_desc.entryCount = bind_group_layout_desc.entryCount;
-    bind_group_desc.entries = &binding;
+    bind_group_desc.entryCount = (uint32_t)bindings.size();
+    bind_group_desc.entries = bindings.data();
     bind_group = device.createBindGroup(bind_group_desc);
-
-    buffer1.release();
-    buffer2.release();
 
     return true;
 }
@@ -470,20 +403,15 @@ void Application::tick()
     // render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
     // Upload first values
-    uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
-    uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
-    glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
-    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
-    float angle1 = uniforms.time;
-    glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
-    uniforms.model = rot1 * trans1 * scale;
+    //uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
+    //uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
+    //glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
+    //glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
+    //float angle1 = uniforms.time;
+    //glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
+    //uniforms.model = rot1 * trans1 * scale;
 
-    queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
-
-    //// Upload second value
-    // uniforms.time += 0.3f;
-    // uniforms.color = {1.0f, 1.0f, 1.0f, 0.7f};
-    // queue.writeBuffer(uniform_buffer, uniform_stride, &uniforms, sizeof(MyUniforms));
+    //queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
     render_pass.end();
     render_pass.release();
@@ -576,6 +504,8 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     required_limits.limits.maxTextureDimension1D = WIN_HEIGHT;
     required_limits.limits.maxTextureDimension2D = WIN_WIDTH;
     required_limits.limits.maxTextureArrayLayers = 1;
+    // Add the possibility to sample a texture in a shader
+    required_limits.limits.maxSampledTexturesPerShaderStage = 1;
 
     return required_limits;
 }
@@ -583,7 +513,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
 void Application::initialize_buffers()
 {
     std::vector<VertexAttributes> vertex_data;
-    bool success = load_geometry_from_obj(RESOURCE_DIR "/mammoth.obj", vertex_data);
+    bool success = load_geometry_from_obj(RESOURCE_DIR "/plane.obj", vertex_data);
     if (!success)
     {
         std::cerr << "Could not load geometry!" << std::endl;
@@ -734,19 +664,27 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     pipeline_desc.multisample.alphaToCoverageEnabled = false;
     pipeline_desc.layout = nullptr;
 
-    // Create binding layout (don't forget to = Default)
-    BindGroupLayoutEntry binding_layout = Default;
-    // The binding index as used in the @binding attribute in the shader
+    
+    std::vector<BindGroupLayoutEntry> binding_layout_entries(2, Default);
+
+    // The uniform buffer binding that we already had
+    BindGroupLayoutEntry& binding_layout = binding_layout_entries[0];
     binding_layout.binding = 0;
-    // The stage that needs to access this resource
     binding_layout.visibility = ShaderStage::Vertex | ShaderStage::Fragment;
     binding_layout.buffer.type = BufferBindingType::Uniform;
     binding_layout.buffer.minBindingSize = sizeof(MyUniforms);
     binding_layout.buffer.hasDynamicOffset = true;
+    // The texture binding
+    BindGroupLayoutEntry& texture_binding_layout = binding_layout_entries[1];
+    // Setup texture binding
+    texture_binding_layout.binding = 1;
+    texture_binding_layout.visibility = ShaderStage::Fragment;
+    texture_binding_layout.texture.sampleType = TextureSampleType::Float;
+    texture_binding_layout.texture.viewDimension = TextureViewDimension::_2D;
 
     // Create a bind group layout
-    bind_group_layout_desc.entryCount = 1;
-    bind_group_layout_desc.entries = &binding_layout;
+    bind_group_layout_desc.entryCount = (uint32_t)binding_layout_entries.size();
+    bind_group_layout_desc.entries = binding_layout_entries.data();
     bind_group_layout = device.createBindGroupLayout(bind_group_layout_desc);
 
     // Create the pipeline layout
@@ -786,6 +724,56 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     depth_texture_view_desc.format = depth_texture_format;
     depth_texture_view = depth_texture.createView(depth_texture_view_desc);
     std::cout << "Depth texture view: " << depth_texture_view << std::endl;
+
+    TextureDescriptor quad_texture_desc;
+    quad_texture_desc.dimension = TextureDimension::_2D;
+    quad_texture_desc.size = {256, 256, 1};
+    quad_texture_desc.mipLevelCount = 1;
+    quad_texture_desc.sampleCount = 1;
+    quad_texture_desc.format = TextureFormat::RGBA8Unorm;
+    quad_texture_desc.usage = TextureUsage::TextureBinding | TextureUsage::CopyDst;
+    quad_texture_desc.viewFormatCount = 0;
+    quad_texture_desc.viewFormats = nullptr;
+    quad_texture = device.createTexture(quad_texture_desc);
+    std::cout << "Quad texture: " << quad_texture << std::endl;
+
+    TextureViewDescriptor texture_view_desc;
+    texture_view_desc.aspect = TextureAspect::All;
+    texture_view_desc.baseArrayLayer = 0;
+    texture_view_desc.arrayLayerCount = 1;
+    texture_view_desc.baseMipLevel = 0;
+    texture_view_desc.mipLevelCount = 1;
+    texture_view_desc.dimension = TextureViewDimension::_2D;
+    texture_view_desc.format = quad_texture_desc.format;
+    quad_texture_view = quad_texture.createView(texture_view_desc);
+
+    // Create image data
+    std::vector<uint8_t> pixels(4 * quad_texture_desc.size.width * quad_texture_desc.size.height);
+    for (uint32_t i = 0; i < quad_texture_desc.size.width; ++i)
+    {
+        for (uint32_t j = 0; j < quad_texture_desc.size.height; ++j)
+        {
+            uint8_t* p = &pixels[4 * (j * quad_texture_desc.size.width + i)];
+            p[0] = (uint8_t)i; // r
+            p[1] = (uint8_t)j; // g
+            p[2] = 128;        // b
+            p[3] = 255;        // a
+        }
+    }
+    // Arguments telling which part of the texture we upload to
+    // (together with the last argument of writeTexture)
+    ImageCopyTexture destination;
+    destination.texture = quad_texture;
+    destination.mipLevel = 0;
+    destination.origin = {0, 0, 0};          // equivalent of the offset argument of Queue::writeBuffer
+    destination.aspect = TextureAspect::All; // only relevant for depth/Stencil textures
+    // Arguments telling how the C++ side pixel memory is laid out
+    TextureDataLayout source;
+    source.offset = 0;
+    source.bytesPerRow = 4 * quad_texture_desc.size.width;
+    source.rowsPerImage = quad_texture_desc.size.height;
+
+    queue.writeTexture(destination, pixels.data(), pixels.size(), source, quad_texture_desc.size);
 
     std::cout << "Pipeline Initialized!" << std::endl;
 }

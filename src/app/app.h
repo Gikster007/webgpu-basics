@@ -83,8 +83,11 @@ class Application
     TextureFormat surface_format = TextureFormat::Undefined;
     RenderPipeline pipeline;
     BindGroup bind_group;
+
     Texture depth_texture;
     TextureView depth_texture_view;
+    Texture quad_texture;
+    TextureView quad_texture_view;
 
     // Application attributes
     Buffer vertex_buffer;
