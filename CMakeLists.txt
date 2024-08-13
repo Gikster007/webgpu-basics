@@ -15,6 +15,11 @@ FetchContent_MakeAvailable(webgpu)
 add_executable(webgpu-basics "src/main.cpp")
 
 add_subdirectory(glfw3webgpu)
+add_subdirectory(glm)
+
+# Compile Definitions for GLM to work nicely with WebGPU
+target_compile_definitions(webgpu-basics PUBLIC GLM_FORCE_DEPTH_ZERO_TO_ONE)
+target_compile_definitions(webgpu-basics PUBLIC GLM_FORCE_LEFT_HANDED)
 
 if (EMSCRIPTEN)
     # Emscripten has built-in support for GLFW but requires the `-sUSE_GLFW=3` link option:
@@ -22,7 +27,7 @@ if (EMSCRIPTEN)
     target_link_options(glfw INTERFACE -sUSE_GLFW=3)
 endif()
 
-target_link_libraries(webgpu-basics PRIVATE webgpu glfw glfw3webgpu)
+target_link_libraries(webgpu-basics PRIVATE webgpu glfw glfw3webgpu glm)
 
 # Glob all source files
 file(GLOB_RECURSE SOURCES

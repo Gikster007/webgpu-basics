@@ -19,6 +19,9 @@ struct VertexOutput
  */
  struct MyUniforms 
  {
+	proj: mat4x4f,
+    view: mat4x4f,
+    model: mat4x4f,
     color: vec4f,
     time: f32,
  };
@@ -29,19 +32,9 @@ struct VertexOutput
 @vertex
 fn vs_main(in: VertexInput) -> VertexOutput 
 {
-    let ratio = 1920.0 / 1080.0; // The width and height of the target surface
-    var out: VertexOutput; // Create the output struct
-    let angle = uMyUniforms.time; // you can multiply it go rotate faster
-    let alpha = cos(angle);
-    let beta = sin(angle);
-    var position = vec3f(
-        in.position.x,
-        alpha * in.position.y + beta * in.position.z,
-        alpha * in.position.z - beta * in.position.y,
-    );
-
-    out.position = vec4f(position.x , position.y * ratio, position.z * 0.5 + 0.5, 1.0);
-    out.color = in.color; // Send input color over to frag shader
+    var out: VertexOutput;
+    out.position = uMyUniforms.proj * uMyUniforms.view * uMyUniforms.model * vec4f(in.position, 1.0);
+    out.color = in.color;
     return out;
 }
 

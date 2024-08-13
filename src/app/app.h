@@ -20,7 +20,10 @@ namespace fs = std::filesystem;
  */
 struct MyUniforms
 {
-    std::array<float, 4> color;
+    glm::mat4 proj;
+    glm::mat4 view;
+    glm::mat4 model;
+    glm::vec4 color;
     float time;
     float _pad[3];
 };

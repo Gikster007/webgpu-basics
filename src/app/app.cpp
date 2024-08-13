@@ -122,7 +122,7 @@ bool Application::initialize()
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "WebGPU basics", nullptr, nullptr);
+    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "WebGPU Basics", nullptr, nullptr);
 
     Instance instance = wgpuCreateInstance(nullptr);
     assert(instance && "CRITICAL: Instance failed to initialise");
@@ -275,6 +275,27 @@ bool Application::initialize()
         wgpu_poll_events(device, true /* yieldToBrowser */);
     }
 
+    // Camera Setup
+    glm::vec3 focal_point(0.0, 0.0, -2.0);
+    float focal_length = 1.0;
+    float angle1 = 1.0;
+    float angle2 = 3.0 * PI / 4.0;
+
+    glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(0.3));
+    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(1.0, 0.0, 0.0));
+    glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
+    uniforms.model = rot1 * trans1 * scale;
+
+    glm::mat4 rot2 = glm::rotate(glm::mat4(1.0), -angle2, glm::vec3(1.0, 0.0, 0.0));
+    glm::mat4 trans2 = glm::translate(glm::mat4(1.0), -focal_point);
+    uniforms.view = trans2 * rot2;
+
+    float near = 0.001f;
+    float far = 100.0f;
+    float ratio = WIN_RATIO;
+    float fov = 2 * glm::atan(1 / focal_length);
+    uniforms.proj = glm::perspective(fov, ratio, near, far);
+
     initialize_buffers();
 
     // Create a binding
@@ -396,9 +417,15 @@ void Application::tick()
     //render_pass.setBindGroup(0, bind_group, 1, &dynamicOffset);
     //render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
-    // Upload first value
+    // Upload first values
     uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
+    glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
+    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.5, 0.0, 0.0));
+    float angle1 = uniforms.time;
+    glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
+    uniforms.model = rot1 * trans1 * scale;
+    
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
     //// Upload second value
@@ -490,7 +517,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // We use at most 1 uniform buffer per stage
     required_limits.limits.maxUniformBuffersPerShaderStage = 1;
     // Uniform structs have a size of maximum 16 float (more than what we need)
-    required_limits.limits.maxUniformBufferBindingSize = 16 * 4;
+    required_limits.limits.maxUniformBufferBindingSize = 16 * 4 * sizeof(float);
     // Extra limit requirement
     required_limits.limits.maxDynamicUniformBuffersPerPipelineLayout = 1;
     // For the depth buffer, we enable textures (up to the size of the window):
