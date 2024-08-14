@@ -138,6 +138,9 @@ bool Application::load_geometry_from_obj(const fs::path& path, std::vector<Verte
 
             vertex_data[offset + i].color = {attrib.colors[3 * idx.vertex_index + 0], attrib.colors[3 * idx.vertex_index + 1],
                                              attrib.colors[3 * idx.vertex_index + 2]};
+
+            // UV conversion due to differences between OBJ files and Modern Graphics APIs
+            vertex_data[offset + i].uv = {attrib.texcoords[2 * idx.texcoord_index + 0], 1 - attrib.texcoords[2 * idx.texcoord_index + 1]};
         }
     }
 
@@ -265,7 +268,6 @@ bool Application::initialize()
 
     // Camera Setup
     glm::vec3 focal_point(0.0, 0.0, -2.0);
-    float focal_length = 1.0;
     float angle1 = 1.0;
     float angle2 = 3.0 * PI / 4.0;
 
@@ -281,18 +283,19 @@ bool Application::initialize()
     float near = 0.001f;
     float far = 100.0f;
     float ratio = WIN_RATIO;
-    float fov = 2 * glm::atan(1 / focal_length);
+    float fov = 45 * PI / 180;
     uniforms.proj = glm::perspective(fov, ratio, near, far);
 
     // QUAD TEXTURE TESTING
     uniforms.model = glm::mat4(1.0);
-    uniforms.view = glm::scale(glm::mat4(1.0), glm::vec3(1.0f));
-    uniforms.proj = glm::ortho(-1, 1, -1, 1, -1, 1);
+    uniforms.view =
+        glm::lookAt(glm::vec3(-2.0f, -3.0f, 2.0f), glm::vec3(0.0f), glm::vec3(0, 0, 1)); // the last argument indicates our Up direction convention
+    uniforms.proj = glm::perspective(fov, WIN_RATIO, 0.01f, 100.0f);
 
     initialize_buffers();
 
     // Create a binding
-    std::vector<BindGroupEntry> bindings(2);
+    std::vector<BindGroupEntry> bindings(3);
     // Uniform Buffer Binding
     bindings[0].binding = 0;
     bindings[0].buffer = uniform_buffer;
@@ -301,6 +304,9 @@ bool Application::initialize()
     // Quad Texture Binding
     bindings[1].binding = 1;
     bindings[1].textureView = quad_texture_view;
+    // Sampler Binding
+    bindings[2].binding = 2;
+    bindings[2].sampler = sampler;
 
     // A bind group contains one or multiple bindings
     BindGroupDescriptor bind_group_desc;
@@ -403,15 +409,18 @@ void Application::tick()
     // render_pass.drawIndexed(index_count, 1, 0, 0, 0);
 
     // Upload first values
-    //uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
-    //uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
-    //glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
-    //glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
-    //float angle1 = uniforms.time;
-    //glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
-    //uniforms.model = rot1 * trans1 * scale;
+    uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
+    uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
+    /*glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
+    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
+    float angle1 = uniforms.time;
+    glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
+    uniforms.model = rot1 * trans1 * scale;
+    queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));*/
 
-    //queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
+    float viewZ = glm::mix(0.0f, 0.25f, cos(2 * PI * uniforms.time / 4) * 0.5 + 0.5);
+    uniforms.view = glm::lookAt(glm::vec3(-0.5f, -1.5f, viewZ + 0.25f), glm::vec3(0.0f), glm::vec3(0, 0, 1));
+    queue.writeBuffer(uniform_buffer, offsetof(MyUniforms, view), &uniforms.view, sizeof(MyUniforms::view));
 
     render_pass.end();
     render_pass.release();
@@ -481,7 +490,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     RequiredLimits required_limits = Default;
 
     // We use at most 3 vertex attribute
-    required_limits.limits.maxVertexAttributes = 3;
+    required_limits.limits.maxVertexAttributes = 4;
     // We should also tell that we use 2 vertex buffers
     required_limits.limits.maxVertexBuffers = 2;
     // Maximum size of a buffer
@@ -491,7 +500,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // This must be set even if we do not use storage buffers for now
     required_limits.limits.minStorageBufferOffsetAlignment = supported_limits.limits.minStorageBufferOffsetAlignment;
     // There is a maximum of 6 float forwarded from vertex to fragment shader
-    required_limits.limits.maxInterStageShaderComponents = 6;
+    required_limits.limits.maxInterStageShaderComponents = 8;
     // We use at most 1 bind group for now
     required_limits.limits.maxBindGroups = 1;
     // We use at most 1 uniform buffer per stage
@@ -506,6 +515,8 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     required_limits.limits.maxTextureArrayLayers = 1;
     // Add the possibility to sample a texture in a shader
     required_limits.limits.maxSampledTexturesPerShaderStage = 1;
+    // Set amount of samplers
+    required_limits.limits.maxSamplersPerShaderStage = 1;
 
     return required_limits;
 }
@@ -561,7 +572,7 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     // We use one vertex buffer
     VertexBufferLayout vertex_buffer_layout;
     // We now have 2 attributes
-    std::vector<VertexAttribute> vertex_attribs(3);
+    std::vector<VertexAttribute> vertex_attribs(4);
 
     // Describe the position attribute
     vertex_attribs[0].shaderLocation = 0; // @location(0)
@@ -577,6 +588,11 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     vertex_attribs[2].shaderLocation = 2;
     vertex_attribs[2].format = VertexFormat::Float32x3;
     vertex_attribs[2].offset = offsetof(VertexAttributes, color);
+
+    // UV attribute
+    vertex_attribs[3].shaderLocation = 3;
+    vertex_attribs[3].format = VertexFormat::Float32x2;
+    vertex_attribs[3].offset = offsetof(VertexAttributes, uv);
 
     vertex_buffer_layout.attributeCount = static_cast<uint32_t>(vertex_attribs.size());
     vertex_buffer_layout.attributes = vertex_attribs.data();
@@ -665,7 +681,7 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     pipeline_desc.layout = nullptr;
 
     
-    std::vector<BindGroupLayoutEntry> binding_layout_entries(2, Default);
+    std::vector<BindGroupLayoutEntry> binding_layout_entries(3, Default);
 
     // The uniform buffer binding that we already had
     BindGroupLayoutEntry& binding_layout = binding_layout_entries[0];
@@ -676,11 +692,15 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     binding_layout.buffer.hasDynamicOffset = true;
     // The texture binding
     BindGroupLayoutEntry& texture_binding_layout = binding_layout_entries[1];
-    // Setup texture binding
     texture_binding_layout.binding = 1;
     texture_binding_layout.visibility = ShaderStage::Fragment;
     texture_binding_layout.texture.sampleType = TextureSampleType::Float;
     texture_binding_layout.texture.viewDimension = TextureViewDimension::_2D;
+    // The texture sampler binding
+    BindGroupLayoutEntry& samplerBindingLayout = binding_layout_entries[2];
+    samplerBindingLayout.binding = 2;
+    samplerBindingLayout.visibility = ShaderStage::Fragment;
+    samplerBindingLayout.sampler.type = SamplerBindingType::Filtering;
 
     // Create a bind group layout
     bind_group_layout_desc.entryCount = (uint32_t)binding_layout_entries.size();
@@ -725,10 +745,11 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     depth_texture_view = depth_texture.createView(depth_texture_view_desc);
     std::cout << "Depth texture view: " << depth_texture_view << std::endl;
 
+    // Create the quad texture
     TextureDescriptor quad_texture_desc;
     quad_texture_desc.dimension = TextureDimension::_2D;
     quad_texture_desc.size = {256, 256, 1};
-    quad_texture_desc.mipLevelCount = 1;
+    quad_texture_desc.mipLevelCount = 8;
     quad_texture_desc.sampleCount = 1;
     quad_texture_desc.format = TextureFormat::RGBA8Unorm;
     quad_texture_desc.usage = TextureUsage::TextureBinding | TextureUsage::CopyDst;
@@ -742,38 +763,81 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     texture_view_desc.baseArrayLayer = 0;
     texture_view_desc.arrayLayerCount = 1;
     texture_view_desc.baseMipLevel = 0;
-    texture_view_desc.mipLevelCount = 1;
+    texture_view_desc.mipLevelCount = quad_texture_desc.mipLevelCount;
     texture_view_desc.dimension = TextureViewDimension::_2D;
     texture_view_desc.format = quad_texture_desc.format;
     quad_texture_view = quad_texture.createView(texture_view_desc);
 
-    // Create image data
-    std::vector<uint8_t> pixels(4 * quad_texture_desc.size.width * quad_texture_desc.size.height);
-    for (uint32_t i = 0; i < quad_texture_desc.size.width; ++i)
-    {
-        for (uint32_t j = 0; j < quad_texture_desc.size.height; ++j)
-        {
-            uint8_t* p = &pixels[4 * (j * quad_texture_desc.size.width + i)];
-            p[0] = (uint8_t)i; // r
-            p[1] = (uint8_t)j; // g
-            p[2] = 128;        // b
-            p[3] = 255;        // a
-        }
-    }
-    // Arguments telling which part of the texture we upload to
-    // (together with the last argument of writeTexture)
+    // Create a sampler
+    SamplerDescriptor sampler_desc;
+    sampler_desc.addressModeU = AddressMode::Repeat;
+    sampler_desc.addressModeV = AddressMode::Repeat;
+    sampler_desc.addressModeW = AddressMode::ClampToEdge;
+    sampler_desc.magFilter = FilterMode::Linear;
+    sampler_desc.minFilter = FilterMode::Linear;
+    sampler_desc.mipmapFilter = MipmapFilterMode::Linear;
+    sampler_desc.lodMinClamp = 0.0f;
+    sampler_desc.lodMaxClamp = 8.0f;
+    sampler_desc.compare = CompareFunction::Undefined;
+    sampler_desc.maxAnisotropy = 1;
+    sampler = device.createSampler(sampler_desc);
+
+    // Create and upload texture data, one mip level at a time
     ImageCopyTexture destination;
     destination.texture = quad_texture;
-    destination.mipLevel = 0;
-    destination.origin = {0, 0, 0};          // equivalent of the offset argument of Queue::writeBuffer
-    destination.aspect = TextureAspect::All; // only relevant for depth/Stencil textures
-    // Arguments telling how the C++ side pixel memory is laid out
+    destination.origin = {0, 0, 0};
+    destination.aspect = TextureAspect::All;
+
     TextureDataLayout source;
     source.offset = 0;
-    source.bytesPerRow = 4 * quad_texture_desc.size.width;
-    source.rowsPerImage = quad_texture_desc.size.height;
 
-    queue.writeTexture(destination, pixels.data(), pixels.size(), source, quad_texture_desc.size);
+    Extent3D mip_level_size = quad_texture_desc.size;
+    std::vector<uint8_t> previous_level_pixels;
+    for (uint32_t level = 0; level < quad_texture_desc.mipLevelCount; ++level)
+    {
+        // Create image data for this mip level
+        std::vector<uint8_t> pixels(4 * mip_level_size.width * mip_level_size.height);
+        for (uint32_t i = 0; i < mip_level_size.width; ++i)
+        {
+            for (uint32_t j = 0; j < mip_level_size.height; ++j)
+            {
+                uint8_t* p = &pixels[4 * (j * mip_level_size.width + i)];
+                if (level == 0)
+                {
+                    // Our initial texture formula
+                    p[0] = (i / 16) % 2 == (j / 16) % 2 ? 255 : 0; // r
+                    p[1] = ((i - j) / 16) % 2 == 0 ? 255 : 0;      // g
+                    p[2] = ((i + j) / 16) % 2 == 0 ? 255 : 0;      // b
+                }
+                else
+                {
+                    //Get the corresponding 4 pixels from the previous level
+                    uint8_t* p00 = &previous_level_pixels[4 * ((2 * j + 0) * (2 * mip_level_size.width) + (2 * i + 0))];
+                    uint8_t* p01 = &previous_level_pixels[4 * ((2 * j + 0) * (2 * mip_level_size.width) + (2 * i + 1))];
+                    uint8_t* p10 = &previous_level_pixels[4 * ((2 * j + 1) * (2 * mip_level_size.width) + (2 * i + 0))];
+                    uint8_t* p11 = &previous_level_pixels[4 * ((2 * j + 1) * (2 * mip_level_size.width) + (2 * i + 1))];
+                    // Average
+                    p[0] = (p00[0] + p01[0] + p10[0] + p11[0]) / 4;
+                    p[1] = (p00[1] + p01[1] + p10[1] + p11[1]) / 4;
+                    p[2] = (p00[2] + p01[2] + p10[2] + p11[2]) / 4;
+                }
+                p[3] = 255; // a
+            }
+        }
+        // Change this to the current level
+        destination.mipLevel = level;
+        // Compute from the mip level size
+        source.bytesPerRow = 4 * mip_level_size.width;
+        source.rowsPerImage = mip_level_size.height;
+
+        queue.writeTexture(destination, pixels.data(), pixels.size(), source, mip_level_size);
+
+        // The size of the next mip level: (see https://www.w3.org/TR/webgpu/#logical-miplevel-specific-texture-extent)
+        mip_level_size.width /= 2;
+        mip_level_size.height /= 2;
+
+        previous_level_pixels = std::move(pixels);
+    }
 
     std::cout << "Pipeline Initialized!" << std::endl;
 }

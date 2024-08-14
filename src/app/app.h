@@ -39,6 +39,7 @@ struct VertexAttributes
     glm::vec3 position;
     glm::vec3 normal;
     glm::vec3 color;
+    glm::vec2 uv;
 };
 
 class Application
@@ -88,6 +89,7 @@ class Application
     TextureView depth_texture_view;
     Texture quad_texture;
     TextureView quad_texture_view;
+    Sampler sampler;
 
     // Application attributes
     Buffer vertex_buffer;

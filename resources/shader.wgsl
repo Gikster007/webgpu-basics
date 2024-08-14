@@ -2,7 +2,8 @@ struct VertexInput
 {
     @location(0) position: vec3f,
     @location(1) normal: vec3f,
-	@location(2) color: vec3f
+	@location(2) color: vec3f,
+    @location(3) uv: vec2f,
 };
 
 struct VertexOutput 
@@ -14,6 +15,7 @@ struct VertexOutput
     // as input to the fragment shader.)
     @location(0) color: vec3f,
 	@location(1) normal: vec3f,
+    @location(2) uv: vec2f,
 };
 
 /**
@@ -31,6 +33,7 @@ struct VertexOutput
 // The memory location of the uniform is given by a pair of a *bind group* and a *binding*
 @group(0) @binding(0) var<uniform> uMyUniforms: MyUniforms;
 @group(0) @binding(1) var gradientTexture: texture_2d<f32>;
+@group(0) @binding(2) var textureSampler: sampler;
 
 @vertex
 fn vs_main(in: VertexInput) -> VertexOutput 
@@ -38,7 +41,8 @@ fn vs_main(in: VertexInput) -> VertexOutput
     var out: VertexOutput;
     out.position = uMyUniforms.proj * uMyUniforms.view * uMyUniforms.model * vec4f(in.position, 1.0);
     out.color = in.color;
-	out.normal = (uMyUniforms.model * vec4f(in.normal, 0.0)).xyz;;
+	out.normal = (uMyUniforms.model * vec4f(in.normal, 0.0)).xyz;
+    out.uv = in.uv * 6.0;
     return out;
 }
 
@@ -60,7 +64,6 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4f
     // let color = in.color * shading;
 
     // return vec4f(color, uMyUniforms.color.a);
-
-    let color = textureLoad(gradientTexture, vec2i(in.position.xy), 0).rgb;
+    let color = textureSample(gradientTexture, textureSampler, in.uv).rgb;
     return vec4f(color, 1.0);
 }
