@@ -72,7 +72,13 @@ class Application
 
     bool load_geometry_from_obj(const fs::path& path, std::vector<VertexAttributes>& vertex_data);
 
+    Texture load_texture(const fs::path& path, Device device, TextureView* texture_view = nullptr);
+
     ShaderModule load_shader_module(const fs::path& path, Device device);
+
+    static void write_mip_maps(Device device, Texture texture, Extent3D texture_size,
+                             [[maybe_unused]] uint32_t mip_level_count, // not used yet
+                             const unsigned char* pixel_data);
 
   private:
     // We put here all the variables that are shared between init and main loop
@@ -87,8 +93,6 @@ class Application
 
     Texture depth_texture;
     TextureView depth_texture_view;
-    Texture quad_texture;
-    TextureView quad_texture_view;
     Sampler sampler;
 
     // Application attributes

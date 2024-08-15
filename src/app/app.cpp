@@ -3,8 +3,25 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "../tiny_obj_loader.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "../stb_image.h"
+
 #include <fstream>
 #include <sstream>
+
+// Equivalent of std::bit_width that is available from C++20 onward
+uint32_t bit_width(uint32_t m)
+{
+    if (m == 0)
+        return 0;
+    else
+    {
+        uint32_t w = 0;
+        while (m >>= 1)
+            ++w;
+        return w;
+    }
+}
 
 // We define a function that hides implementation-specific variants of device polling:
 void wgpu_poll_events([[maybe_unused]] Device device, [[maybe_unused]] bool yieldToWebBrowser)
@@ -147,6 +164,45 @@ bool Application::load_geometry_from_obj(const fs::path& path, std::vector<Verte
     return true;
 }
 
+Texture Application::load_texture(const fs::path& path, Device device, TextureView* texture_view)
+{
+    int width, height, channels;
+    unsigned char* pixel_data = stbi_load(path.string().c_str(), &width, &height, &channels, 4 /* force 4 channels */);
+    if (nullptr == pixel_data)
+        return nullptr;
+
+    TextureDescriptor texture_desc;
+    texture_desc.dimension = TextureDimension::_2D;
+    texture_desc.format = TextureFormat::RGBA8Unorm; // by convention for bmp, png and jpg file. Be careful with other formats.
+    texture_desc.size = {(unsigned int)width, (unsigned int)height, 1};
+    texture_desc.mipLevelCount = bit_width(std::max(texture_desc.size.width, texture_desc.size.height));
+    texture_desc.sampleCount = 1;
+    texture_desc.usage = TextureUsage::TextureBinding | TextureUsage::CopyDst;
+    texture_desc.viewFormatCount = 0;
+    texture_desc.viewFormats = nullptr;
+    Texture texture = device.createTexture(texture_desc);
+
+    if (texture_view)
+    {
+        TextureViewDescriptor texture_view_desc;
+        texture_view_desc.aspect = TextureAspect::All;
+        texture_view_desc.baseArrayLayer = 0;
+        texture_view_desc.arrayLayerCount = 1;
+        texture_view_desc.baseMipLevel = 0;
+        texture_view_desc.mipLevelCount = texture_desc.mipLevelCount;
+        texture_view_desc.dimension = TextureViewDimension::_2D;
+        texture_view_desc.format = texture_desc.format;
+        *texture_view = texture.createView(texture_view_desc);
+    }
+
+    // Upload data to the GPU texture (to be implemented!)
+    write_mip_maps(device, texture, texture_desc.size, texture_desc.mipLevelCount, pixel_data);
+
+    stbi_image_free(pixel_data);
+
+    return texture;
+}
+
 ShaderModule Application::load_shader_module(const fs::path& path, Device device)
 {
     std::ifstream file(path);
@@ -173,6 +229,71 @@ ShaderModule Application::load_shader_module(const fs::path& path, Device device
     shader_desc.nextInChain = &shader_code_desc.chain;
 
     return device.createShaderModule(shader_desc);
+}
+
+void Application::write_mip_maps(Device device, Texture texture, Extent3D texture_size, uint32_t mip_level_count, const unsigned char* pixel_data)
+{
+    Queue queue = device.getQueue();
+
+    // Arguments telling which part of the texture we upload to
+    ImageCopyTexture destination;
+    destination.texture = texture;
+    destination.origin = {0, 0, 0};
+    destination.aspect = TextureAspect::All;
+
+    // Arguments telling how the C++ side pixel memory is laid out
+    TextureDataLayout source;
+    source.offset = 0;
+
+    // Create image data
+    Extent3D mip_level_size = texture_size;
+    std::vector<unsigned char> previous_level_pixels;
+    Extent3D previous_mip_level_size;
+    for (uint32_t level = 0; level < mip_level_count; ++level)
+    {
+        // Pixel data for the current level
+        std::vector<unsigned char> pixels(4 * mip_level_size.width * mip_level_size.height);
+        if (level == 0)
+        {
+            // We cannot really avoid this copy since we need this
+            // in previous_level_pixels at the next iteration
+            memcpy(pixels.data(), pixel_data, pixels.size());
+        }
+        else
+        {
+            // Create mip level data
+            for (uint32_t i = 0; i < mip_level_size.width; ++i)
+            {
+                for (uint32_t j = 0; j < mip_level_size.height; ++j)
+                {
+                    unsigned char* p = &pixels[4 * (j * mip_level_size.width + i)];
+                    // Get the corresponding 4 pixels from the previous level
+                    unsigned char* p00 = &previous_level_pixels[4 * ((2 * j + 0) * previous_mip_level_size.width + (2 * i + 0))];
+                    unsigned char* p01 = &previous_level_pixels[4 * ((2 * j + 0) * previous_mip_level_size.width + (2 * i + 1))];
+                    unsigned char* p10 = &previous_level_pixels[4 * ((2 * j + 1) * previous_mip_level_size.width + (2 * i + 0))];
+                    unsigned char* p11 = &previous_level_pixels[4 * ((2 * j + 1) * previous_mip_level_size.width + (2 * i + 1))];
+                    // Average
+                    p[0] = (p00[0] + p01[0] + p10[0] + p11[0]) / 4;
+                    p[1] = (p00[1] + p01[1] + p10[1] + p11[1]) / 4;
+                    p[2] = (p00[2] + p01[2] + p10[2] + p11[2]) / 4;
+                    p[3] = (p00[3] + p01[3] + p10[3] + p11[3]) / 4;
+                }
+            }
+        }
+
+        // Upload data to the GPU texture
+        destination.mipLevel = level;
+        source.bytesPerRow = 4 * mip_level_size.width;
+        source.rowsPerImage = mip_level_size.height;
+        queue.writeTexture(destination, pixels.data(), pixels.size(), source, mip_level_size);
+
+        previous_level_pixels = std::move(pixels);
+        previous_mip_level_size = mip_level_size;
+        mip_level_size.width /= 2;
+        mip_level_size.height /= 2;
+    }
+
+    queue.release();
 }
 
 bool Application::initialize()
@@ -266,6 +387,15 @@ bool Application::initialize()
     // Release the adapter only after it has been fully utilized
     adapter.release();
 
+    // Create a texture
+    TextureView texture_view = nullptr;
+    Texture texture = load_texture(RESOURCE_DIR "/fourareen2K_albedo.jpg", device, &texture_view);
+    if (!texture)
+    {
+        std::cerr << "Could not load texture!" << std::endl;
+        return false;
+    }
+
     // Camera Setup
     glm::vec3 focal_point(0.0, 0.0, -2.0);
     float angle1 = 1.0;
@@ -288,9 +418,8 @@ bool Application::initialize()
 
     // QUAD TEXTURE TESTING
     uniforms.model = glm::mat4(1.0);
-    uniforms.view =
-        glm::lookAt(glm::vec3(-2.0f, -3.0f, 2.0f), glm::vec3(0.0f), glm::vec3(0, 0, 1)); // the last argument indicates our Up direction convention
-    uniforms.proj = glm::perspective(fov, WIN_RATIO, 0.01f, 100.0f);
+    uniforms.view = glm::lookAt(glm::vec3(-2.0f, -3.0f, 2.0f), glm::vec3(0.0f), glm::vec3(0, 0, 1));
+    uniforms.proj = glm::perspective(fov, ratio, near, far);
 
     initialize_buffers();
 
@@ -303,7 +432,7 @@ bool Application::initialize()
     bindings[0].size = sizeof(MyUniforms);
     // Quad Texture Binding
     bindings[1].binding = 1;
-    bindings[1].textureView = quad_texture_view;
+    bindings[1].textureView = texture_view;
     // Sampler Binding
     bindings[2].binding = 2;
     bindings[2].sampler = sampler;
@@ -411,15 +540,6 @@ void Application::tick()
     // Upload first values
     uniforms.time = /*1.0f*/ static_cast<float>(glfwGetTime());
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
-    /*glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0));
-    glm::mat4 trans1 = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
-    float angle1 = uniforms.time;
-    glm::mat4 rot1 = glm::rotate(glm::mat4(1.0), angle1, glm::vec3(0.0, 0.0, 1.0));
-    uniforms.model = rot1 * trans1 * scale;
-    queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));*/
-
-    float viewZ = glm::mix(0.0f, 0.25f, cos(2 * PI * uniforms.time / 4) * 0.5 + 0.5);
-    uniforms.view = glm::lookAt(glm::vec3(-0.5f, -1.5f, viewZ + 0.25f), glm::vec3(0.0f), glm::vec3(0, 0, 1));
     queue.writeBuffer(uniform_buffer, offsetof(MyUniforms, view), &uniforms.view, sizeof(MyUniforms::view));
 
     render_pass.end();
@@ -494,7 +614,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     // We should also tell that we use 2 vertex buffers
     required_limits.limits.maxVertexBuffers = 2;
     // Maximum size of a buffer
-    required_limits.limits.maxBufferSize = 10000 * sizeof(VertexAttributes);
+    required_limits.limits.maxBufferSize = 150000 * sizeof(VertexAttributes);
     // Maximum stride between 2 consecutive vertices in the vertex buffer
     required_limits.limits.maxVertexBufferArrayStride = sizeof(VertexAttributes);
     // This must be set even if we do not use storage buffers for now
@@ -509,9 +629,9 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
     required_limits.limits.maxUniformBufferBindingSize = 16 * 4 * sizeof(float);
     // Extra limit requirement
     required_limits.limits.maxDynamicUniformBuffersPerPipelineLayout = 1;
-    // For the depth buffer, we enable textures (up to the size of the window):
-    required_limits.limits.maxTextureDimension1D = WIN_HEIGHT;
-    required_limits.limits.maxTextureDimension2D = WIN_WIDTH;
+    // Allow textures up to 2K
+    required_limits.limits.maxTextureDimension1D = 2048;
+    required_limits.limits.maxTextureDimension2D = 2048;
     required_limits.limits.maxTextureArrayLayers = 1;
     // Add the possibility to sample a texture in a shader
     required_limits.limits.maxSampledTexturesPerShaderStage = 1;
@@ -524,7 +644,7 @@ RequiredLimits Application::get_required_limits(Adapter adapter) const
 void Application::initialize_buffers()
 {
     std::vector<VertexAttributes> vertex_data;
-    bool success = load_geometry_from_obj(RESOURCE_DIR "/plane.obj", vertex_data);
+    bool success = load_geometry_from_obj(RESOURCE_DIR "/fourareen.obj", vertex_data);
     if (!success)
     {
         std::cerr << "Could not load geometry!" << std::endl;
@@ -745,29 +865,6 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     depth_texture_view = depth_texture.createView(depth_texture_view_desc);
     std::cout << "Depth texture view: " << depth_texture_view << std::endl;
 
-    // Create the quad texture
-    TextureDescriptor quad_texture_desc;
-    quad_texture_desc.dimension = TextureDimension::_2D;
-    quad_texture_desc.size = {256, 256, 1};
-    quad_texture_desc.mipLevelCount = 8;
-    quad_texture_desc.sampleCount = 1;
-    quad_texture_desc.format = TextureFormat::RGBA8Unorm;
-    quad_texture_desc.usage = TextureUsage::TextureBinding | TextureUsage::CopyDst;
-    quad_texture_desc.viewFormatCount = 0;
-    quad_texture_desc.viewFormats = nullptr;
-    quad_texture = device.createTexture(quad_texture_desc);
-    std::cout << "Quad texture: " << quad_texture << std::endl;
-
-    TextureViewDescriptor texture_view_desc;
-    texture_view_desc.aspect = TextureAspect::All;
-    texture_view_desc.baseArrayLayer = 0;
-    texture_view_desc.arrayLayerCount = 1;
-    texture_view_desc.baseMipLevel = 0;
-    texture_view_desc.mipLevelCount = quad_texture_desc.mipLevelCount;
-    texture_view_desc.dimension = TextureViewDimension::_2D;
-    texture_view_desc.format = quad_texture_desc.format;
-    quad_texture_view = quad_texture.createView(texture_view_desc);
-
     // Create a sampler
     SamplerDescriptor sampler_desc;
     sampler_desc.addressModeU = AddressMode::Repeat;
@@ -781,63 +878,6 @@ void Application::initialize_pipeline(BindGroupLayoutDescriptor& bind_group_layo
     sampler_desc.compare = CompareFunction::Undefined;
     sampler_desc.maxAnisotropy = 1;
     sampler = device.createSampler(sampler_desc);
-
-    // Create and upload texture data, one mip level at a time
-    ImageCopyTexture destination;
-    destination.texture = quad_texture;
-    destination.origin = {0, 0, 0};
-    destination.aspect = TextureAspect::All;
-
-    TextureDataLayout source;
-    source.offset = 0;
-
-    Extent3D mip_level_size = quad_texture_desc.size;
-    std::vector<uint8_t> previous_level_pixels;
-    for (uint32_t level = 0; level < quad_texture_desc.mipLevelCount; ++level)
-    {
-        // Create image data for this mip level
-        std::vector<uint8_t> pixels(4 * mip_level_size.width * mip_level_size.height);
-        for (uint32_t i = 0; i < mip_level_size.width; ++i)
-        {
-            for (uint32_t j = 0; j < mip_level_size.height; ++j)
-            {
-                uint8_t* p = &pixels[4 * (j * mip_level_size.width + i)];
-                if (level == 0)
-                {
-                    // Our initial texture formula
-                    p[0] = (i / 16) % 2 == (j / 16) % 2 ? 255 : 0; // r
-                    p[1] = ((i - j) / 16) % 2 == 0 ? 255 : 0;      // g
-                    p[2] = ((i + j) / 16) % 2 == 0 ? 255 : 0;      // b
-                }
-                else
-                {
-                    //Get the corresponding 4 pixels from the previous level
-                    uint8_t* p00 = &previous_level_pixels[4 * ((2 * j + 0) * (2 * mip_level_size.width) + (2 * i + 0))];
-                    uint8_t* p01 = &previous_level_pixels[4 * ((2 * j + 0) * (2 * mip_level_size.width) + (2 * i + 1))];
-                    uint8_t* p10 = &previous_level_pixels[4 * ((2 * j + 1) * (2 * mip_level_size.width) + (2 * i + 0))];
-                    uint8_t* p11 = &previous_level_pixels[4 * ((2 * j + 1) * (2 * mip_level_size.width) + (2 * i + 1))];
-                    // Average
-                    p[0] = (p00[0] + p01[0] + p10[0] + p11[0]) / 4;
-                    p[1] = (p00[1] + p01[1] + p10[1] + p11[1]) / 4;
-                    p[2] = (p00[2] + p01[2] + p10[2] + p11[2]) / 4;
-                }
-                p[3] = 255; // a
-            }
-        }
-        // Change this to the current level
-        destination.mipLevel = level;
-        // Compute from the mip level size
-        source.bytesPerRow = 4 * mip_level_size.width;
-        source.rowsPerImage = mip_level_size.height;
-
-        queue.writeTexture(destination, pixels.data(), pixels.size(), source, mip_level_size);
-
-        // The size of the next mip level: (see https://www.w3.org/TR/webgpu/#logical-miplevel-specific-texture-extent)
-        mip_level_size.width /= 2;
-        mip_level_size.height /= 2;
-
-        previous_level_pixels = std::move(pixels);
-    }
 
     std::cout << "Pipeline Initialized!" << std::endl;
 }

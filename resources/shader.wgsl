@@ -42,7 +42,7 @@ fn vs_main(in: VertexInput) -> VertexOutput
     out.position = uMyUniforms.proj * uMyUniforms.view * uMyUniforms.model * vec4f(in.position, 1.0);
     out.color = in.color;
 	out.normal = (uMyUniforms.model * vec4f(in.normal, 0.0)).xyz;
-    out.uv = in.uv * 6.0;
+    out.uv = in.uv * 1.0;
     return out;
 }
 

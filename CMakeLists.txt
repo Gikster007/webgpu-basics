@@ -64,6 +64,8 @@ endif()
 # Catch more warnings
 if (MSVC)
     target_compile_options(webgpu-basics PRIVATE /W4)
+    # Disable warning C4244: conversion from 'int' to 'short', possible loss of data
+    target_compile_options(webgpu-basics PUBLIC /wd4244)
 else()
     target_compile_options(webgpu-basics PRIVATE -Wall -Wextra -pedantic)
 endif()
