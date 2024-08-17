@@ -124,6 +124,19 @@ bool Application::is_running()
     return !glfwWindowShouldClose(window);
 }
 
+void Application::on_resize()
+{
+    // Terminate in reverse order
+    terminate_depth_buffer();
+    terminate_swap_chain();
+
+    // Re-initialise depth buffer and swap chain with correct win res
+    init_swap_chain();
+    init_depth_buffer();
+
+    update_projection_matrix();
+}
+
 bool Application::init_window_and_device()
 {
     instance = createInstance(InstanceDescriptor{});
@@ -140,13 +153,22 @@ bool Application::init_window_and_device()
     }
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "WebGPU Basics", NULL, NULL);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    window = glfwCreateWindow(1280, 720, "WebGPU Basics", NULL, NULL);
     if (!window)
     {
         std::cerr << "Could not open window!" << std::endl;
         return false;
     }
+
+    // Set the user pointer to be "this"
+    glfwSetWindowUserPointer(window, this);
+    // Use a non-capturing lambda as resize callback
+    glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int, int) {
+        auto that = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+        if (that != nullptr)
+            that->on_resize();
+    });
 
     std::cout << "Requesting adapter..." << std::endl;
     surface = glfwGetWGPUSurface(instance, window);
@@ -219,9 +241,14 @@ void Application::terminate_window_and_device()
 bool Application::init_swap_chain()
 {
     std::cout << "Creating swapchain..." << std::endl;
+
+    // Get the current size of the window's framebuffer:
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+
     SwapChainDescriptor swap_chain_desc;
-    swap_chain_desc.width = WIN_WIDTH;
-    swap_chain_desc.height = WIN_HEIGHT;
+    swap_chain_desc.width = static_cast<uint32_t>(width);
+    swap_chain_desc.height = static_cast<uint32_t>(height);
     swap_chain_desc.usage = TextureUsage::RenderAttachment;
     swap_chain_desc.format = swap_chain_format;
     swap_chain_desc.presentMode = PresentMode::Fifo;
@@ -237,13 +264,17 @@ void Application::terminate_swap_chain()
 
 bool Application::init_depth_buffer()
 {
+    // Get the current size of the window's framebuffer:
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+
     // Create the depth texture
     TextureDescriptor depth_texture_desc;
     depth_texture_desc.dimension = TextureDimension::_2D;
     depth_texture_desc.format = depth_texture_format;
     depth_texture_desc.mipLevelCount = 1;
     depth_texture_desc.sampleCount = 1;
-    depth_texture_desc.size = {WIN_WIDTH, WIN_HEIGHT, 1};
+    depth_texture_desc.size = {static_cast<uint32_t>(width), static_cast<uint32_t>(height), 1};
     depth_texture_desc.usage = TextureUsage::RenderAttachment;
     depth_texture_desc.viewFormatCount = 1;
     depth_texture_desc.viewFormats = (WGPUTextureFormat*)&depth_texture_format;
@@ -488,7 +519,7 @@ bool Application::init_uniforms()
     // Upload the initial value of the uniforms
     uniforms.model = glm::mat4(1.0);
     uniforms.view = glm::lookAt(glm::vec3(-2.0f, -3.0f, 2.0f), glm::vec3(0.0f), glm::vec3(0, 0, 1));
-    uniforms.proj = glm::perspective(45 * PI / 180, WIN_RATIO, 0.01f, 100.0f);
+    uniforms.proj = glm::perspective(45 * PI / 180, 1280.0f / 720.0f, 0.01f, 100.0f);
     uniforms.time = 1.0f;
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
@@ -530,4 +561,16 @@ bool Application::init_bind_group()
 void Application::terminate_bind_group()
 {
     bind_group.release();
+}
+
+void Application::update_projection_matrix()
+{
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    // In case window is minimised
+    if (width == 0 || height == 0)
+        return;
+    float ratio = width / (float)height;
+    uniforms.proj = glm::perspective(45 * PI / 180, ratio, 0.01f, 100.0f);
+    queue.writeBuffer(uniform_buffer, offsetof(MyUniforms, proj), &uniforms.proj, sizeof(MyUniforms::proj));
 }

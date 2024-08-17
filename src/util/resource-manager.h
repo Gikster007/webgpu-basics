@@ -1,7 +1,6 @@
 #pragma once
 
 #include <webgpu/webgpu.hpp>
-#include <glm/glm.hpp>
 
 #include <vector>
 #include <filesystem>
@@ -10,12 +9,10 @@ class ResourceManager
 {
   public:
     using path = std::filesystem::path;
-
-    /**
-     * A structure that describes the data layout in the vertex buffer,
-     * used by loadGeometryFromObj and used it in `sizeof` and `offsetof`
-     * when uploading data to the GPU.
-     */
+    
+    //A structure that describes the data layout in the vertex buffer,
+    //used by loadGeometryFromObj and used it in `sizeof` and `offsetof`
+    //when uploading data to the GPU.
     struct VertexAttributes
     {
         glm::vec3 position;

@@ -6,9 +6,7 @@ using namespace wgpu;
 
 struct GLFWwindow;
 
-/**
- * The same structure as in the shader, replicated in C++
- */
+// The same structure as in the shader, replicated in C++
 struct MyUniforms
 {
     glm::mat4 proj;
@@ -36,6 +34,9 @@ class Application
     // Return true as long as the main loop should keep on running
     bool is_running();
 
+    // A function called when the window is resized
+    void on_resize();
+
   private:
     bool init_window_and_device();
     void terminate_window_and_device();
@@ -60,6 +61,8 @@ class Application
 
     bool init_bind_group();
     void terminate_bind_group();
+
+    void update_projection_matrix();
 
   private:
     // Window and Device
