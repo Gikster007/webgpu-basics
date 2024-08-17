@@ -364,7 +364,7 @@ void Application::terminate_depth_buffer()
 bool Application::init_render_pipeline()
 {
     std::cout << "Creating shader module..." << std::endl;
-    shader_module = ResourceManager::loadShaderModule(RESOURCE_DIR "/shader.wgsl", device);
+    shader_module = ResourceManager::load_shader_module(RESOURCE_DIR "/shader.wgsl", device);
     std::cout << "Shader module: " << shader_module << std::endl;
 
     std::cout << "Creating render pipeline..." << std::endl;
@@ -514,7 +514,7 @@ bool Application::init_texture()
     sampler = device.createSampler(sampler_desc);
 
     // Create a texture
-    texture = ResourceManager::loadTexture(RESOURCE_DIR "/fourareen2K_albedo.jpg", device, &texture_view);
+    texture = ResourceManager::load_texture(RESOURCE_DIR "/fourareen2K_albedo.jpg", device, &texture_view);
     if (!texture)
     {
         std::cerr << "Could not load texture!" << std::endl;
@@ -538,7 +538,7 @@ bool Application::init_geometry()
 {
     // Load mesh data from OBJ file
     std::vector<VertexAttributes> vertex_data;
-    bool success = ResourceManager::loadGeometryFromObj(RESOURCE_DIR "/fourareen.obj", vertex_data);
+    bool success = ResourceManager::load_geometry_from_obj(RESOURCE_DIR "/fourareen.obj", vertex_data);
     if (!success)
     {
         std::cerr << "Could not load geometry!" << std::endl;
