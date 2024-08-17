@@ -137,6 +137,50 @@ void Application::on_resize()
     update_projection_matrix();
 }
 
+void Application::on_mouse_move(double xpos, double ypos)
+{
+    if (drag.active)
+    {
+        glm::vec2 current_mouse = glm::vec2(-(float)xpos, (float)ypos);
+        glm::vec2 delta = (current_mouse - drag.start_mouse) * drag.sensitivity;
+        camera_state.angles = drag.start_camera_state.angles + delta;
+        // Clamp to avoid going too far when orbitting up/down
+        camera_state.angles.y = glm::clamp(camera_state.angles.y, -PI / 2 + 1e-5f, PI / 2 - 1e-5f);
+        update_view_matrix();
+
+        // Inertia
+        drag.velocity = delta - drag.previous_delta;
+        drag.previous_delta = delta;
+    }
+}
+
+void Application::on_mouse_button(int button, int action, int /*mods*/)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT)
+    {
+        switch (action)
+        {
+        case GLFW_PRESS:
+            drag.active = true;
+            double xpos, ypos;
+            glfwGetCursorPos(window, &xpos, &ypos);
+            drag.start_mouse = glm::vec2(-(float)xpos, (float)ypos);
+            drag.start_camera_state = camera_state;
+            break;
+        case GLFW_RELEASE:
+            drag.active = false;
+            break;
+        }
+    }
+}
+
+void Application::on_scroll(double /*xoffset*/, double yoffset)
+{
+    camera_state.zoom += drag.scroll_sensitivity * static_cast<float>(yoffset);
+    camera_state.zoom = glm::clamp(camera_state.zoom, -2.0f, 2.0f);
+    update_view_matrix();
+}
+
 bool Application::init_window_and_device()
 {
     instance = createInstance(InstanceDescriptor{});
@@ -161,13 +205,27 @@ bool Application::init_window_and_device()
         return false;
     }
 
-    // Set the user pointer to be "this"
+    // Add window callbacks
     glfwSetWindowUserPointer(window, this);
-    // Use a non-capturing lambda as resize callback
     glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int, int) {
         auto that = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
         if (that != nullptr)
             that->on_resize();
+    });
+    glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
+        auto that = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+        if (that != nullptr)
+            that->on_mouse_move(xpos, ypos);
+    });
+    glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
+        auto that = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+        if (that != nullptr)
+            that->on_mouse_button(button, action, mods);
+    });
+    glfwSetScrollCallback(window, [](GLFWwindow* window, double xoffset, double yoffset) {
+        auto that = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+        if (that != nullptr)
+            that->on_scroll(xoffset, yoffset);
     });
 
     std::cout << "Requesting adapter..." << std::endl;
@@ -524,6 +582,8 @@ bool Application::init_uniforms()
     uniforms.color = {0.0f, 1.0f, 0.4f, 1.0f};
     queue.writeBuffer(uniform_buffer, 0, &uniforms, sizeof(MyUniforms));
 
+    update_view_matrix();
+
     return uniform_buffer != nullptr;
 }
 
@@ -573,4 +633,34 @@ void Application::update_projection_matrix()
     float ratio = width / (float)height;
     uniforms.proj = glm::perspective(45 * PI / 180, ratio, 0.01f, 100.0f);
     queue.writeBuffer(uniform_buffer, offsetof(MyUniforms, proj), &uniforms.proj, sizeof(MyUniforms::proj));
+}
+
+void Application::update_view_matrix()
+{
+    float cx = cos(camera_state.angles.x);
+    float sx = sin(camera_state.angles.x);
+    float cy = cos(camera_state.angles.y);
+    float sy = sin(camera_state.angles.y);
+    glm::vec3 position = glm::vec3(cx * cy, sx * cy, sy) * std::exp(-camera_state.zoom);
+    uniforms.view = glm::lookAt(position, glm::vec3(0.0f), glm::vec3(0, 0, 1));
+    queue.writeBuffer(uniform_buffer, offsetof(MyUniforms, view), &uniforms.view, sizeof(MyUniforms::view));
+}
+
+void Application::update_drag_inertia()
+{
+    constexpr float eps = 1e-4f;
+    // Apply inertia only when the user released the click.
+    if (!drag.active)
+    {
+        // Avoid updating the matrix when the velocity is no longer noticeable
+        if (std::abs(drag.velocity.x) < eps && std::abs(drag.velocity.y) < eps)
+        {
+            return;
+        }
+        camera_state.angles += drag.velocity;
+        camera_state.angles.y = glm::clamp(camera_state.angles.y, -PI / 2 + 1e-5f, PI / 2 - 1e-5f);
+        // Dampen the velocity so that it decreases exponentially and stops after a few frames.
+        drag.velocity *= drag.intertia;
+        update_view_matrix();
+    }
 }
